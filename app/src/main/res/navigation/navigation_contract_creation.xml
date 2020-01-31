@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/navigation_contract_creation"
+    app:startDestination="@id/crowdfunding1">
+
+    <fragment
+        android:id="@+id/crowdfunding1"
+        android:name="com.aveyon.meivsm.ui.contracts.crowdfunding.Crowdfunding1"
+        android:label="fragment_crowdfunding1"
+        tools:layout="@layout/fragment_crowdfunding1" >
+        <action
+            android:id="@+id/action_crowdfunding1_to_crowdfunding2"
+            app:destination="@id/crowdfunding2"
+            app:enterAnim="@anim/nav_default_pop_enter_anim"
+            app:exitAnim="@anim/nav_default_pop_exit_anim"
+            app:popEnterAnim="@anim/nav_default_pop_enter_anim"
+            app:popExitAnim="@anim/nav_default_pop_exit_anim"
+            app:popUpTo="@+id/crowdfunding1" />
+    </fragment>
+    <fragment
+        android:id="@+id/crowdfunding2"
+        android:name="com.aveyon.meivsm.ui.contracts.crowdfunding.Crowdfunding2"
+        android:label="fragment_crowdfunding2"
+        tools:layout="@layout/fragment_crowdfunding2" >
+        <action
+            android:id="@+id/action_crowdfunding2_to_crowdfunding3"
+            app:destination="@id/crowdfunding3"
+            app:enterAnim="@anim/nav_default_enter_anim"
+            app:exitAnim="@anim/nav_default_exit_anim"
+            app:launchSingleTop="false"
+            app:popEnterAnim="@anim/nav_default_pop_enter_anim"
+            app:popExitAnim="@anim/nav_default_pop_exit_anim"
+            app:popUpTo="@+id/crowdfunding2" />
+    </fragment>
+    <fragment
+        android:id="@+id/crowdfunding3"
+        android:name="com.aveyon.meivsm.ui.contracts.crowdfunding.Crowdfunding3"
+        android:label="fragment_crowdfunding3"
+        tools:layout="@layout/fragment_crowdfunding3" >
+        <action
+            android:id="@+id/action_crowdfunding3_to_crowdfunding4"
+            app:destination="@id/crowdfunding4"
+            app:enterAnim="@anim/nav_default_enter_anim"
+            app:exitAnim="@anim/nav_default_exit_anim" />
+    </fragment>
+    <fragment
+        android:id="@+id/crowdfunding4"
+        android:name="com.aveyon.meivsm.ui.contracts.crowdfunding.Crowdfunding4"
+        android:label="fragment_crowdfunding4"
+        tools:layout="@layout/fragment_crowdfunding4" />
+</navigation>
