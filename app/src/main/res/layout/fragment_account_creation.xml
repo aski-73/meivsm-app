@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="viewModel"
+            type="com.aveyon.meivsm.ui.accounts.AccountsViewModel"></variable>
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".ui.accounts.AccountCreationFragment">
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/eoa_name_label"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="10dp"
+            android:hint="@string/eoa_name"
+            app:errorEnabled="true"
+            app:isRegularName="@{viewModel.accountToCreate.name}"
+            app:helperText="@string/eoa_name_desc"
+            app:hintAnimationEnabled="true"
+            app:hintEnabled="true"
+            app:layout_constrainedWidth="false"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintWidth_default="spread">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/eoa_name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="textShortMessage|textAutoComplete"
+                android:text="@={viewModel.accountToCreate.name}" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/eoa_pub_addr_label"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="32dp"
+            android:layout_marginEnd="10dp"
+            android:hint="@string/eoa_pub_addr"
+            app:helperText="@string/eoa_pub_addr_desc"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/eoa_name_label">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:text="@={viewModel.accountToCreate.publicAddress}"
+                android:id="@+id/eoa_pub_addr"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/eoa_priv_key_label"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="32dp"
+            android:layout_marginEnd="10dp"
+            android:hint="@string/eoa_priv_key"
+            app:helperText="@string/eoa_priv_key_desc"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/eoa_pub_addr_label">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:text="@={viewModel.accountToCreate.privateKey}"
+                android:id="@+id/eoa_priv_key"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <Button
+            android:onClick="@{() -> viewModel.createAccount()}"
+            android:id="@+id/eoa_creation_done"
+            android:layout_width="164dp"
+            android:layout_height="79dp"
+            android:layout_marginBottom="80dp"
+            android:text="@string/global_btn_create"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <Button
+            android:id="@+id/eoa_creation_cancel"
+            style="@style/Widget.AppCompat.Button.Borderless"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="26dp"
+            android:text="@string/global_btn_cancel"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

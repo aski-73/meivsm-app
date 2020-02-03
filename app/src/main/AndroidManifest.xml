@@ -19,7 +19,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".ui.contracts.crowdfunding.CrowdfundingActivity"
+            android:name="com.aveyon.meivsm.ui.home.crowdfunding.CrowdfundingActivity"
             android:label="@string/activity_crowdfunding"
             android:parentActivityName=".MainActivity">
             <!-- Parent activity meta-data to support 4.0 and lower -->

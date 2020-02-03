@@ -9,7 +9,7 @@
         android:id="@+id/textView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="60dp"
+        android:layout_marginTop="16dp"
         android:fontFamily="@font/roboto_light"
         android:text="@string/home_header"
         android:textColor="#000000"
@@ -20,40 +20,28 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+    <ImageView
+        android:id="@+id/crowdfunding_svg"
+        android:layout_width="278dp"
+        android:layout_height="290dp"
+        app:layout_constraintBottom_toTopOf="@+id/choose_contract"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.496"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView"
+        app:layout_constraintVertical_bias="0.375"
+        app:srcCompat="@drawable/ic_crowdfunding" />
+
     <Button
         android:id="@+id/choose_contract"
         android:layout_width="164dp"
         android:layout_height="79dp"
-        android:layout_marginBottom="108dp"
+        android:layout_marginBottom="36dp"
         android:text="@string/home_choose"
         android:visibility="visible"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent" />
-
-    <TextView
-        android:id="@+id/text_home"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="8dp"
-        android:textAlignment="center"
-        android:textSize="20sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <ImageView
-        android:id="@+id/imageView3"
-        android:layout_width="311dp"
-        android:layout_height="536dp"
-        app:layout_constraintBottom_toTopOf="@+id/choose_contract"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/text_home"
-        app:layout_constraintVertical_bias="0.0"
-        app:srcCompat="@drawable/ic_crowdfunding" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

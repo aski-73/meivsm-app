@@ -1,16 +1,12 @@
-package com.aveyon.meivsm.ui.contracts.crowdfunding
+package com.aveyon.meivsm.ui.home.crowdfunding
 
 import android.content.Context
-import android.net.Uri
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ArrayAdapter
 import android.widget.Button
-import android.widget.Spinner
-import androidx.navigation.findNavController
 import com.aveyon.meivsm.R
 
 // TODO: Rename parameter arguments, choose names that match
@@ -21,16 +17,25 @@ private const val ARG_PARAM2 = "param2"
 /**
  * A simple [Fragment] subclass.
  * Activities that contain this fragment must implement the
- * [Crowdfunding1.OnFragmentInteractionListener] interface
+ * [Crowdfunding4.OnFragmentInteractionListener] interface
  * to handle interaction events.
- * Use the [Crowdfunding1.newInstance] factory method to
+ * Use the [Crowdfunding4.newInstance] factory method to
  * create an instance of this fragment.
  */
-class Crowdfunding1 : Fragment() {
+class Crowdfunding4 : Fragment() {
     // TODO: Rename and change types of parameters
     private var param1: String? = null
     private var param2: String? = null
     private var listener: OnFragmentInteractionListener? = null
+
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+        if (context is OnFragmentInteractionListener) {
+            listener = context
+        } else {
+            throw RuntimeException("$context must implement OnFragmentInteractionListener")
+        }
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -45,41 +50,15 @@ class Crowdfunding1 : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        var fragment = inflater.inflate(R.layout.fragment_crowdfunding1, container, false);
+        val fragment = inflater.inflate(R.layout.fragment_crowdfunding4, container, false)
 
-        var spinner: Spinner = fragment.findViewById(R.id.crowdfunding_unit_spinner)
-        ArrayAdapter.createFromResource(
-            activity,
-            R.array.eth_units_array,
-            android.R.layout.simple_spinner_item
-        ).also { adapter ->
-            // Specify the layout to use when the list of choices appears
-            adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
-            // Apply the adapter to the spinner
-            spinner.adapter = adapter
+        fragment.findViewById<Button>(R.id.crowdfunding_done).setOnClickListener {
+            listener?.onFinish()
         }
 
-        // Zur nächsten Seite..
-        fragment.findViewById<Button>(R.id.crowdfunding_next1).setOnClickListener { v ->
-            val action = Crowdfunding1Directions.actionCrowdfunding1ToCrowdfunding2()
-            v.findNavController().navigate(action)
-        }
-
+        // Toolbar ausblenden
+//        listener?.onFragmentDisplay()
         return fragment
-    }
-
-    // TODO: Rename method, update argument and hook method into UI event
-    fun onButtonPressed(uri: Uri) {
-        listener?.onFragmentInteraction(uri)
-    }
-
-    override fun onAttach(context: Context) {
-        super.onAttach(context)
-        if (context is OnFragmentInteractionListener) {
-            listener = context
-        } else {
-            throw RuntimeException(context.toString() + " must implement OnFragmentInteractionListener")
-        }
     }
 
     override fun onDetach() {
@@ -99,8 +78,9 @@ class Crowdfunding1 : Fragment() {
      * for more information.
      */
     interface OnFragmentInteractionListener {
-        // TODO: Update argument type and name
-        fun onFragmentInteraction(uri: Uri)
+        fun onFragmentDisplay()
+        fun onContractCreation()
+        fun onFinish()
     }
 
     companion object {
@@ -110,12 +90,12 @@ class Crowdfunding1 : Fragment() {
          *
          * @param param1 Parameter 1.
          * @param param2 Parameter 2.
-         * @return A new instance of fragment Crowdfunding1.
+         * @return A new instance of fragment Crowdfunding4.
          */
         // TODO: Rename and change types and number of parameters
         @JvmStatic
         fun newInstance(param1: String, param2: String) =
-            Crowdfunding1().apply {
+            Crowdfunding4().apply {
                 arguments = Bundle().apply {
                     putString(ARG_PARAM1, param1)
                     putString(ARG_PARAM2, param2)

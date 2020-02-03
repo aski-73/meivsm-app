@@ -1,11 +1,14 @@
 <resources>
     <string name="app_name">meivsm</string>
 
-    <string name="activity_crowdfunding">Crowdfunding</string>
 
     <!--    Text für "Weiter" Buttons in der ganzen App-->
     <string name="global_btn_next">Weiter</string>
+    <string name="global_btn_create">Erstellen</string>
     <string name="global_btn_done">Fertig</string>
+    <string name="global_btn_cancel">Abbrechen</string>
+    <string name="global_btn_update">Ändern</string>
+    <string name="global_btn_delete">Löschen</string>
 
     <string name="global_contract_created">Erfolgreich ersteltl!</string>
     <string name="global_contract_created_desc">
@@ -23,8 +26,12 @@
     <string name="home_crowdfunding">Crowdfunding</string>
 
     <!--    Crowdfunding Erzeugung-->
+    <string name="activity_crowdfunding">Crowdfunding</string>
+
     <string name="crowdfunding_creation_header">Crowdfunding Vertrag</string>
     <string name="crowdfunding_creation_subheader">Vertragsdaten eintragen</string>
+
+    <string name="crowdfunding_actionbar_header">Crowdfunding Vertrag</string>
 
     <string name="crowdfunding_title">Projektbezeichnung</string>
     <string name="crowdfunding_goal">Zielpreis</string>
@@ -43,6 +50,37 @@
         <item>Wei</item>
     </string-array>
 
+    <!-- Accounts Fragment-->
+    <string name="accounts_header">Mein Konto</string>
+    <string name="accounts_welcome_msg">Hallo %1$s</string>
+    <string name="accounts_welcome_default">:(</string>
+    <string name="account_pub_addr_label">Deine öffentliche Adresse</string>
+    <string name="accounts_desc">
+        Verknüpfen Sie die App mit einem Ethereum Konto. Sie erhalten die Möglichkeit bei der
+        Smart Contract Erzeugung direkt eine Adresse auszuwählen, den Kontostand abzufragen und
+        Sie können mit Smart Contracts kommunizieren.
+    </string>
+    <string name="accounts_btn_create">Konto erstellen. Hier drücken</string>
+
+    <string name="contacts_header">Kontakte</string>
+    <string name="contacts_desc">
+        Keine Kontakte bisher eingetragen. Kontakte  sind öffentliche Adressen anderer
+        Vertragspersonen. Während ein Konto mit einem Etherum
+        Account verknüpft ist, besteht ein Kontakt nur aus einer öffentlchen Adresse (wie die IBAN)
+    </string>
+    <string name="contact_btn_create">Kontakt erstellen. Hier drücken</string>
+
+    <!-- Accounts Creation Fragment-->
+    <string name="eoa_name">Name</string>
+    <string name="eoa_name_desc">Name des Accounts (Assoziation mit einer Adresse)</string>
+    <string name="eoa_pub_addr">Öffentliche Addresse</string>
+    <string name="eoa_pub_addr_desc">Öffentliche Addresse des Ethereum Accounts</string>
+    <string name="eoa_priv_key">Öffentliche Addresse des Ethereum Accounts</string>
+    <string name="eoa_priv_key_desc">Zum Signieren der Nachrichten benötigt</string>
+
+
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+
+
 </resources>

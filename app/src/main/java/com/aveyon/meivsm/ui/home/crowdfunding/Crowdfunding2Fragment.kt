@@ -1,4 +1,4 @@
-package com.aveyon.meivsm.ui.contracts.crowdfunding
+package com.aveyon.meivsm.ui.home.crowdfunding
 
 import android.content.Context
 import android.net.Uri
@@ -59,17 +59,16 @@ class Crowdfunding2 : Fragment() {
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
         spinner.adapter = adapter
 
-        fragment.findViewById<Button>(R.id.crowdfunding_next2).setOnClickListener { v ->
+        fragment.findViewById<Button>(R.id.crowdfunding_next2).setOnClickListener {
             var action = Crowdfunding2Directions.actionCrowdfunding2ToCrowdfunding3()
             fragment.findNavController().navigate(action)
         }
 
-        return fragment
-    }
+        fragment.findViewById<Button>(R.id.crowdfunding_cancel).setOnClickListener{
+            listener?.onCancelContractCreation()
+        }
 
-    // TODO: Rename method, update argument and hook method into UI event
-    fun onButtonPressed(uri: Uri) {
-        listener?.onFragmentInteraction(uri)
+        return fragment
     }
 
     override fun onAttach(context: Context) {
@@ -98,8 +97,8 @@ class Crowdfunding2 : Fragment() {
      * for more information.
      */
     interface OnFragmentInteractionListener {
-        // TODO: Update argument type and name
         fun onFragmentInteraction(uri: Uri)
+        fun onCancelContractCreation()
     }
 
     companion object {

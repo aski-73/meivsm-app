@@ -9,7 +9,7 @@ import android.widget.Button
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProviders
 import com.aveyon.meivsm.R
-import com.aveyon.meivsm.ui.contracts.crowdfunding.CrowdfundingActivity
+import com.aveyon.meivsm.ui.home.crowdfunding.CrowdfundingActivity
 
 class HomeFragment : Fragment() {
 

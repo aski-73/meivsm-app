@@ -1,16 +1,16 @@
-package com.aveyon.meivsm.ui.contracts.crowdfunding
+package com.aveyon.meivsm.ui.home.crowdfunding
 
 import android.content.Context
-import android.content.Intent
-import android.net.Uri
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
-import com.aveyon.meivsm.MainActivity
+import androidx.navigation.findNavController
 import com.aveyon.meivsm.R
+import java.util.*
+import kotlin.concurrent.schedule
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -20,12 +20,12 @@ private const val ARG_PARAM2 = "param2"
 /**
  * A simple [Fragment] subclass.
  * Activities that contain this fragment must implement the
- * [Crowdfunding4.OnFragmentInteractionListener] interface
+ * [Crowdfunding3.OnFragmentInteractionListener] interface
  * to handle interaction events.
- * Use the [Crowdfunding4.newInstance] factory method to
+ * Use the [Crowdfunding3.newInstance] factory method to
  * create an instance of this fragment.
  */
-class Crowdfunding4 : Fragment() {
+class Crowdfunding3 : Fragment() {
     // TODO: Rename and change types of parameters
     private var param1: String? = null
     private var param2: String? = null
@@ -44,18 +44,19 @@ class Crowdfunding4 : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        val fragment = inflater.inflate(R.layout.fragment_crowdfunding4, container, false)
+        val fragment = inflater.inflate(R.layout.fragment_crowdfunding3, container, false)
 
-        fragment.findViewById<Button>(R.id.crowdfunding_done).setOnClickListener {
-            startActivity(Intent(activity, MainActivity::class.java))
+        Timer("Timer", false).schedule(2500) {
+            val action = Crowdfunding3Directions.actionCrowdfunding3ToCrowdfunding4()
+            fragment.findNavController().navigate(action)
         }
 
-        return fragment
-    }
+        fragment.findViewById<Button>(R.id.crowdfunding_cancel).setOnClickListener{
+            listener?.onCancelContractCreation()
+        }
+//        listener?.onFragmentDisplay()
 
-    // TODO: Rename method, update argument and hook method into UI event
-    fun onButtonPressed(uri: Uri) {
-        listener?.onFragmentInteraction(uri)
+        return fragment
     }
 
     override fun onAttach(context: Context) {
@@ -84,8 +85,8 @@ class Crowdfunding4 : Fragment() {
      * for more information.
      */
     interface OnFragmentInteractionListener {
-        // TODO: Update argument type and name
-        fun onFragmentInteraction(uri: Uri)
+        fun onFragmentDisplay()
+        fun onCancelContractCreation()
     }
 
     companion object {
@@ -95,12 +96,12 @@ class Crowdfunding4 : Fragment() {
          *
          * @param param1 Parameter 1.
          * @param param2 Parameter 2.
-         * @return A new instance of fragment Crowdfunding4.
+         * @return A new instance of fragment Crowdfunding3.
          */
         // TODO: Rename and change types and number of parameters
         @JvmStatic
         fun newInstance(param1: String, param2: String) =
-            Crowdfunding4().apply {
+            Crowdfunding3().apply {
                 arguments = Bundle().apply {
                     putString(ARG_PARAM1, param1)
                     putString(ARG_PARAM2, param2)

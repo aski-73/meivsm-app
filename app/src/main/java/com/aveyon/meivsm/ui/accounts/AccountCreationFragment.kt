@@ -1,4 +1,4 @@
-package com.aveyon.meivsm.ui.contracts.crowdfunding
+package com.aveyon.meivsm.ui.accounts
 
 import android.content.Context
 import android.net.Uri
@@ -7,10 +7,10 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.navigation.findNavController
+import androidx.databinding.DataBindingUtil
+import androidx.fragment.app.activityViewModels
 import com.aveyon.meivsm.R
-import java.util.*
-import kotlin.concurrent.schedule
+import com.aveyon.meivsm.databinding.FragmentAccountCreationBinding
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -20,12 +20,12 @@ private const val ARG_PARAM2 = "param2"
 /**
  * A simple [Fragment] subclass.
  * Activities that contain this fragment must implement the
- * [Crowdfunding3.OnFragmentInteractionListener] interface
+ * [AccountCreationFragment.OnFragmentInteractionListener] interface
  * to handle interaction events.
- * Use the [Crowdfunding3.newInstance] factory method to
+ * Use the [AccountCreationFragment.newInstance] factory method to
  * create an instance of this fragment.
  */
-class Crowdfunding3 : Fragment() {
+class AccountCreationFragment : Fragment() {
     // TODO: Rename and change types of parameters
     private var param1: String? = null
     private var param2: String? = null
@@ -43,20 +43,20 @@ class Crowdfunding3 : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+
+        val accountsViewModel: AccountsViewModel by activityViewModels()
+
         // Inflate the layout for this fragment
-        val fragment = inflater.inflate(R.layout.fragment_crowdfunding3, container, false)
+        var binding = DataBindingUtil.inflate<FragmentAccountCreationBinding>(
+            inflater,
+            R.layout.fragment_account_creation,
+            container,
+            false
+        )
 
-        Timer("Timer", false).schedule(2500) {
-            val action = Crowdfunding3Directions.actionCrowdfunding3ToCrowdfunding4()
-            fragment.findNavController().navigate(action)
-        }
+        binding.viewModel = accountsViewModel
 
-        return fragment
-    }
-
-    // TODO: Rename method, update argument and hook method into UI event
-    fun onButtonPressed(uri: Uri) {
-        listener?.onFragmentInteraction(uri)
+        return binding.root
     }
 
     override fun onAttach(context: Context) {
@@ -85,8 +85,6 @@ class Crowdfunding3 : Fragment() {
      * for more information.
      */
     interface OnFragmentInteractionListener {
-        // TODO: Update argument type and name
-        fun onFragmentInteraction(uri: Uri)
     }
 
     companion object {
@@ -96,12 +94,12 @@ class Crowdfunding3 : Fragment() {
          *
          * @param param1 Parameter 1.
          * @param param2 Parameter 2.
-         * @return A new instance of fragment Crowdfunding3.
+         * @return A new instance of fragment AccountCreationFragment.
          */
         // TODO: Rename and change types and number of parameters
         @JvmStatic
         fun newInstance(param1: String, param2: String) =
-            Crowdfunding3().apply {
+            AccountCreationFragment().apply {
                 arguments = Bundle().apply {
                     putString(ARG_PARAM1, param1)
                     putString(ARG_PARAM2, param2)

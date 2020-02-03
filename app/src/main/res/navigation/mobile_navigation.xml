@@ -3,24 +3,69 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/mobile_navigation"
-    app:startDestination="@id/navigation_home">
+    app:startDestination="@id/homeFragment">
 
     <fragment
-        android:id="@+id/navigation_home"
+        android:id="@+id/homeFragment"
         android:name="com.aveyon.meivsm.ui.home.HomeFragment"
         android:label="@string/title_home"
         tools:layout="@layout/fragment_home"/>
 
     <fragment
-        android:id="@+id/navigation_accounts"
+        android:id="@+id/accountsFragment"
         android:name="com.aveyon.meivsm.ui.accounts.AccountsFragment"
         android:label="@string/title_accounts"
-        tools:layout="@layout/fragment_accounts" />
+        tools:layout="@layout/fragment_accounts" >
+        <action
+            android:id="@+id/action_navigation_accounts_to_accountCreationFragment"
+            app:destination="@+id/accountCreationFragment"
+            app:enterAnim="@anim/nav_default_enter_anim"
+            app:exitAnim="@anim/fragment_fade_exit"
+            app:popEnterAnim="@anim/nav_default_pop_enter_anim"
+            app:popExitAnim="@anim/nav_default_exit_anim" />
+        <action
+            android:id="@+id/action_navigation_accounts_to_contactManageFragment"
+            app:destination="@+id/contactManageFragment"
+            app:enterAnim="@anim/fragment_open_enter"
+            app:exitAnim="@anim/fragment_open_exit"
+            app:popEnterAnim="@anim/nav_default_pop_enter_anim"
+            app:popExitAnim="@anim/nav_default_pop_exit_anim" />
+        <action
+            android:id="@+id/action_accountsFragment_to_contactCreationFragment"
+            app:destination="@id/contactCreationFragment"
+            app:enterAnim="@anim/fragment_fade_enter"
+            app:exitAnim="@anim/fragment_fade_exit" />
+    </fragment>
 
     <fragment
-        android:id="@+id/navigation_contracts"
+        android:id="@+id/contractsFragment"
         android:name="com.aveyon.meivsm.ui.contracts.ContractsFragment"
         android:label="@string/title_contracts"
         tools:layout="@layout/fragment_contracts" />
+    <fragment
+        android:id="@+id/accountCreationFragment"
+        android:name="com.aveyon.meivsm.ui.accounts.AccountCreationFragment"
+        android:label="fragment_account_creation"
+        tools:layout="@layout/fragment_account_creation" >
+        <action
+            android:id="@+id/action_accountCreationFragment_to_navigation_accounts"
+            app:destination="@id/accountsFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/contactManageFragment"
+        android:name="com.aveyon.meivsm.ui.accounts.ContactManageFragment"
+        android:label="fragment_contact_creation"
+        tools:layout="@layout/fragment_contact_manage" >
+        <action
+            android:id="@+id/action_contactCreationFragment_to_navigation_accounts"
+            app:destination="@id/accountsFragment"
+            app:enterAnim="@anim/fragment_close_enter"
+            app:exitAnim="@anim/fragment_close_exit" />
+    </fragment>
+    <fragment
+        android:id="@+id/contactCreationFragment"
+        android:name="com.aveyon.meivsm.ContactCreationFragment"
+        android:label="fragment_contact_creation"
+        tools:layout="@layout/fragment_contact_creation" />
 
 </navigation>
