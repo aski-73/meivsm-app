@@ -36,6 +36,9 @@ interface AppDao {
     @Query("SELECT * FROM eoas")
     fun monitorAllEOAs(): LiveData<List<ExternallyOwnedAccount>>
 
+    @Query("SELECT * FROM eoas")
+    suspend fun loadAllEOAs(): List<ExternallyOwnedAccount>
+
     @Query("SELECT * FROM contacts")
     fun monitorAllContacts(): LiveData<List<Contact>>
 

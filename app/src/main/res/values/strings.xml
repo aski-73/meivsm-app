@@ -9,6 +9,7 @@
     <string name="global_btn_cancel">Abbrechen</string>
     <string name="global_btn_update">Ändern</string>
     <string name="global_btn_delete">Löschen</string>
+    <string name="global_btn_pay">Bezahlen</string>
 
     <string name="global_contract_created">Erfolgreich ersteltl!</string>
     <string name="global_contract_created_desc">
@@ -54,6 +55,8 @@
     <string name="accounts_header">Mein Konto</string>
     <string name="accounts_welcome_msg">Hallo %1$s</string>
     <string name="accounts_welcome_default">:(</string>
+    <string name="accounts_balance_header">Dein Kontostand</string>
+    <string name="accounts_balance">%1$s %2$s</string>
     <string name="account_pub_addr_label">Deine öffentliche Adresse</string>
     <string name="accounts_desc">
         Verknüpfen Sie die App mit einem Ethereum Konto. Sie erhalten die Möglichkeit bei der
@@ -79,8 +82,34 @@
     <string name="eoa_priv_key_desc">Zum Signieren der Nachrichten benötigt</string>
 
 
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <!-- (My)Contracts Fragment-->
+    <string name="contracts_header">Meine Verträge</string>
 
+    <!-- Crowdfunding Contract Interaction -->
+    <string name="crowdfunding_sum_to_goal">%1$s %2$s bereits erhalten</string>
+    <string name="crowdfunding_active_till_end_date">Läuft noch bis zum %1$s</string>
+    <string name="crowdfunding_ended_on_date">Geendet am %1$s</string>
+    <string name="crowdfunding_started_date">Gestartet am %1$s</string>
+    <string name="crowdfunding_pay_btn">Am Projekt beteiligen</string>
+    <string name="crowdfunding_successful">Projekt erfogleichreich finanziert</string>
+    <string name="crowdfunding_failed">Projektfinanzierung fehlgeschlagen</string>
+    <string name="crowdfunding_pay_desc">Gib einen Betrag an, mit dem du dich am Projekt beteiligen möchtest</string>
+    <string name="crowdfunding_pay_value">Betrag</string>
+    <string name="crowdfunding_pay_value_hint">Preis</string>
+
+
+    <!-- Transactions -->
+    <string name="trans_doing">Transaktion wird durchgeführt</string>
+    <string name="trans_doing_desc">Transaktion wird durchgeführt. Hab einen Moment Geduld.</string>
+    <string name="trans_done">Transaktion abgeschlossen</string>
+    <string name="trans_done_desc">
+        Beachte, dass dein gezahlter Betrag erst nach Bestätigung eines Blocks in der Blockchain-Netzwerks sichtbar ist.
+    </string>
+
+
+    <!-- ERRORS-->
+    <string name="error_noaccounts">Kein Konto gefunden. Erstelle ein Konto, um fortzufahren</string>
+
+    <string name="hello_blank_fragment">adasdasdas</string>
 
 </resources>

@@ -1,15 +1,13 @@
-package com.aveyon.meivsm.ui.accounts
+package com.aveyon.meivsm.ui.contracts.crowdfunding
 
 import android.content.Context
+import android.net.Uri
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.databinding.DataBindingUtil
-import androidx.fragment.app.activityViewModels
 import com.aveyon.meivsm.R
-import com.aveyon.meivsm.databinding.FragmentContactManageBinding
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -19,12 +17,12 @@ private const val ARG_PARAM2 = "param2"
 /**
  * A simple [Fragment] subclass.
  * Activities that contain this fragment must implement the
- * [ContactManageFragment.OnFragmentInteractionListener] interface
+ * [CrowdfundingFailedState.OnFragmentInteractionListener] interface
  * to handle interaction events.
- * Use the [ContactManageFragment.newInstance] factory method to
+ * Use the [CrowdfundingFailedState.newInstance] factory method to
  * create an instance of this fragment.
  */
-class ContactManageFragment : Fragment() {
+class CrowdfundingFailedState : Fragment() {
     // TODO: Rename and change types of parameters
     private var param1: String? = null
     private var param2: String? = null
@@ -42,19 +40,13 @@ class ContactManageFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        val accountsViewModel: AccountsViewModel by activityViewModels()
-
         // Inflate the layout for this fragment
-        var binding = DataBindingUtil.inflate<FragmentContactManageBinding>(
-            inflater,
-            R.layout.fragment_contact_manage,
-            container,
-            false
-        )
+        return inflater.inflate(R.layout.fragment_crowdfunding_failed_state, container, false)
+    }
 
-        binding.viewModel = accountsViewModel
-
-        return binding.root
+    // TODO: Rename method, update argument and hook method into UI event
+    fun onButtonPressed(uri: Uri) {
+        listener?.onFragmentInteraction(uri)
     }
 
     override fun onAttach(context: Context) {
@@ -62,7 +54,7 @@ class ContactManageFragment : Fragment() {
         if (context is OnFragmentInteractionListener) {
             listener = context
         } else {
-            throw RuntimeException("$context must implement OnFragmentInteractionListener")
+            throw RuntimeException(context.toString() + " must implement OnFragmentInteractionListener")
         }
     }
 
@@ -83,6 +75,8 @@ class ContactManageFragment : Fragment() {
      * for more information.
      */
     interface OnFragmentInteractionListener {
+        // TODO: Update argument type and name
+        fun onFragmentInteraction(uri: Uri)
     }
 
     companion object {
@@ -92,12 +86,12 @@ class ContactManageFragment : Fragment() {
          *
          * @param param1 Parameter 1.
          * @param param2 Parameter 2.
-         * @return A new instance of fragment ContactManageFragment.
+         * @return A new instance of fragment CrowdfundingFailedState.
          */
         // TODO: Rename and change types and number of parameters
         @JvmStatic
         fun newInstance(param1: String, param2: String) =
-            ContactManageFragment().apply {
+            CrowdfundingFailedState().apply {
                 arguments = Bundle().apply {
                     putString(ARG_PARAM1, param1)
                     putString(ARG_PARAM2, param2)

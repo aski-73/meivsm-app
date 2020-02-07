@@ -40,7 +40,7 @@
         android:layout_marginEnd="10dp"
         android:text="@string/crowdfunding_creating"
         android:textAlignment="center"
-        android:textColor="#006633"
+        android:textColor="@color/colorPrimary"
         android:textSize="28sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

@@ -25,8 +25,6 @@ class ContactAdapter(private var itemClickListener: ContactViewHolder.AdapterIte
                 false
             )
 
-//        view = DataBindingUtil.infl
-
         return ContactViewHolder(
             view as TextView, itemClickListener
         )

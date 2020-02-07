@@ -9,6 +9,7 @@ import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import com.aveyon.meivsm.ui.accounts.AccountCreationFragment
+import com.aveyon.meivsm.ui.accounts.ContactCreationFragment
 import com.aveyon.meivsm.ui.accounts.ContactManageFragment
 
 class MainActivity : AppCompatActivity(), AccountCreationFragment.OnFragmentInteractionListener,

@@ -15,44 +15,24 @@ import com.aveyon.meivsm.R
 import com.aveyon.meivsm.databinding.FragmentAccountsBinding
 import com.aveyon.meivsm.ui.accounts.contacts.ContactAdapter
 import com.aveyon.meivsm.ui.accounts.contacts.ContactViewHolder
-import com.aveyon.meivsm.utils.ActionEnum
-import java.util.*
 
 class AccountsFragment : Fragment(), ContactViewHolder.AdapterItemClickListener {
 
     lateinit var viewManager: RecyclerView.LayoutManager
     lateinit var contactAdapter: ContactAdapter
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-
-        val accountsViewModel: AccountsViewModel by activityViewModels()
-
-    }
-
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-//        val root = inflater.inflate(R.layout.fragment_accounts, container, false)
-
-//        val textView: TextView = root.findViewById(R.id.text_dashboard)
-//        accountsViewModel.text.observe(this, Observer {
-//            textView.text = it
-//        })
-
         // Inflate view and obtain an instance of the binding class.
         val binding = DataBindingUtil.inflate<FragmentAccountsBinding>(
             inflater, R.layout.fragment_accounts,
             container, false
         )
 
-        // Obtain the ViewModel component. (Deprecated)
-//        accountsViewModel =
-//            ViewModelProviders.of(this).get(AccountsViewModel::class.java)
         val accountsViewModel: AccountsViewModel by activityViewModels()
-//        _accountsViewModel = accountsViewModel
 
         // Assign the component to a property in the binding class.
         binding.viewModel = accountsViewModel

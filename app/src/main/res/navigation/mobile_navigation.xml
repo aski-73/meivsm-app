@@ -41,7 +41,17 @@
         android:id="@+id/contractsFragment"
         android:name="com.aveyon.meivsm.ui.contracts.ContractsFragment"
         android:label="@string/title_contracts"
-        tools:layout="@layout/fragment_contracts" />
+        tools:layout="@layout/fragment_contracts" >
+        <action
+            android:id="@+id/action_contractsFragment_to_crowdfundingFundingState"
+            app:destination="@id/crowdfundingFundingState" />
+        <action
+            android:id="@+id/action_contractsFragment_to_crowdfundingSuccessfulState"
+            app:destination="@id/crowdfundingSuccessfulState" />
+        <action
+            android:id="@+id/action_contractsFragment_to_crowdfundingFailedState"
+            app:destination="@id/crowdfundingFailedState" />
+    </fragment>
     <fragment
         android:id="@+id/accountCreationFragment"
         android:name="com.aveyon.meivsm.ui.accounts.AccountCreationFragment"
@@ -64,8 +74,52 @@
     </fragment>
     <fragment
         android:id="@+id/contactCreationFragment"
-        android:name="com.aveyon.meivsm.ContactCreationFragment"
+        android:name="com.aveyon.meivsm.ui.accounts.ContactCreationFragment"
         android:label="fragment_contact_creation"
         tools:layout="@layout/fragment_contact_creation" />
+    <fragment
+        android:id="@+id/crowdfundingFundingState"
+        android:name="com.aveyon.meivsm.ui.contracts.crowdfunding.CrowdfundingFundingStateFragment"
+        android:label="fragment_crowdfunding_funding_state"
+        tools:layout="@layout/fragment_crowdfunding_funding_state" >
+        <action
+            android:id="@+id/action_crowdfundingFundingState_to_crowdfundingPayingFragment"
+            app:destination="@id/crowdfundingPayingFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/crowdfundingSuccessfulState"
+        android:name="com.aveyon.meivsm.ui.contracts.crowdfunding.CrowdfundingSuccessfulState"
+        android:label="fragment_crowdfunding_successful_state"
+        tools:layout="@layout/fragment_crowdfunding_successful_state" />
+    <fragment
+        android:id="@+id/crowdfundingFailedState"
+        android:name="com.aveyon.meivsm.ui.contracts.crowdfunding.CrowdfundingFailedState"
+        android:label="fragment_crowdfunding_failed_state"
+        tools:layout="@layout/fragment_crowdfunding_failed_state" />
 
+
+    <action android:id="@+id/action_global_contractsFragment" app:destination="@id/contractsFragment" />
+    <fragment
+        android:id="@+id/crowdfundingPayingFragment"
+        android:name="com.aveyon.meivsm.ui.contracts.crowdfunding.CrowdfundingPayingFragment"
+        android:label="fragment_crowdfunding_paying"
+        tools:layout="@layout/fragment_crowdfunding_paying" >
+        <action
+            android:id="@+id/action_crowdfundingPayingFragment_to_crowdfundingDoTransactionFragment"
+            app:destination="@id/crowdfundingDoTransactionFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/crowdfundingDoTransactionFragment"
+        android:name="com.aveyon.meivsm.ui.contracts.crowdfunding.CrowdfundingDoTransactionFragment"
+        android:label="fragment_crowdfunding_do_transaction"
+        tools:layout="@layout/fragment_crowdfunding_do_transaction" >
+        <action
+            android:id="@+id/action_crowdfundingDoTransactionFragment_to_crowdfundingDoneTransactionFragment"
+            app:destination="@id/crowdfundingDoneTransactionFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/crowdfundingDoneTransactionFragment"
+        android:name="com.aveyon.meivsm.ui.contracts.crowdfunding.CrowdfundingDoneTransactionFragment"
+        android:label="fragment_crowdfunding_done_transaction"
+        tools:layout="@layout/fragment_crowdfunding_done_transaction" />
 </navigation>
