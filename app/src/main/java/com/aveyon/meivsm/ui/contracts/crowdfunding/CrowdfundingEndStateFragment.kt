@@ -2,21 +2,21 @@ package com.aveyon.meivsm.ui.contracts.crowdfunding
 
 import android.content.Context
 import android.os.Bundle
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.activityViewModels
-import androidx.lifecycle.lifecycleScope
-import androidx.navigation.fragment.findNavController
 import com.aveyon.meivsm.R
+import com.aveyon.meivsm.databinding.FragmentCrowdfundingEndStateBinding
+import com.aveyon.meivsm.ui.CrowdfundingFragmentsInteractionListener
 import com.aveyon.meivsm.ui.contracts.ContractsViewModel
 import com.aveyon.meivsm.web3.CrowdfundingContract
-import kotlinx.coroutines.CoroutineExceptionHandler
-import kotlinx.coroutines.launch
 
-class CrowdfundingDoTransactionFragment : Fragment() {
+class CrowdfundingEndStateFragment : Fragment() {
+    private var listener: CrowdfundingFragmentsInteractionListener? = null
+
     /**
      * Viewmodel needed for accessing selected contract
      */
@@ -26,6 +26,12 @@ class CrowdfundingDoTransactionFragment : Fragment() {
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
+
+        if (context is CrowdfundingFragmentsInteractionListener) {
+            listener = context
+        } else {
+            throw RuntimeException("$context must implement OnFragmentInteractionListener")
+        }
 
         /**
          * Factory for creating CrowdfundingViewmodel that holds all values for interaction
@@ -47,31 +53,22 @@ class CrowdfundingDoTransactionFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        var fragment =
-            inflater.inflate(R.layout.fragment_crowdfunding_do_transaction, container, false)
+        var binding = DataBindingUtil.inflate<FragmentCrowdfundingEndStateBinding>(
+            inflater,
+            R.layout.fragment_crowdfunding_end_state,
+            container,
+            false
+        )
 
-        return fragment
+        binding.lifecycleOwner = this
+        binding.fragment = this
+        binding.viewModel = viewModel
+
+
+        return binding.root
     }
 
-    override fun onStart() {
-        super.onStart()
-        var exceptionHandler = CoroutineExceptionHandler { _, exception ->
-            var action =
-                CrowdfundingDoTransactionFragmentDirections.actionCrowdfundingDoTransactionFragmentToErrorFragment(
-                    exception.message.toString()
-                )
-            findNavController().navigate(action)
-        }
-
-        lifecycleScope.launch(exceptionHandler) {
-            Log.d(javaClass.name, viewModel.toString())
-            // geht nicht, da viewmodel eine neue instanz ist und somit den Userinput nicht mehr enthält
-            var receipt = viewModel.makePayTransaction()
-
-            // Navigate to DoneTransactionFragment when Transaction went without problems
-            var action =
-                CrowdfundingDoTransactionFragmentDirections.actionCrowdfundingDoTransactionFragmentToCrowdfundingDoneTransactionFragment()
-            findNavController().navigate(action)
-        }
+    fun back() {
+        listener?.onCancelCrowdfundingFragment()
     }
 }

@@ -73,9 +73,10 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
                 android:fontFamily="@font/roboto_mono_thin"
-                android:text="@{viewModel.accounts.get(0).publicAddress}"
+                android:text="@{viewModel.accountToPresent.publicAddress}"
                 android:textSize="14sp"
                 android:visibility="@{viewModel.accounts.size() > 0 ? View.VISIBLE : View.GONE}"
+                android:onClick="@{() -> fragment.onNavToAccountUpdate()}"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/account_pub_addr_label" />
 <!--            -->
@@ -95,12 +96,13 @@
 
             <Button
                 android:id="@+id/accounts_btn_create"
-                android:onClick="@{() -> fragment.onAccountCreation()}"
+                android:onClick="@{() -> fragment.onNavToAccountCreation()}"
                 style="@style/Widget.AppCompat.Button.Borderless"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="32dp"
                 android:text="@string/accounts_btn_create"
+                android:visibility="@{viewModel.accounts.size() == 0 ? View.VISIBLE : View.GONE}"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/accounts_desc" />
@@ -109,10 +111,10 @@
                 android:id="@+id/hr"
                 android:layout_width="match_parent"
                 android:layout_height="2dp"
-                android:layout_marginTop="16dp"
+                android:layout_marginTop="380dp"
                 android:background="#000000"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/accounts_btn_create" />
+                app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
                 android:id="@+id/contact_header"
@@ -146,7 +148,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="90dp"
-                android:onClick="@{() -> fragment.onContactCreation()}"
+                android:onClick="@{() -> fragment.onNavToContactCreation()}"
                 android:text="@string/contact_btn_create"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"

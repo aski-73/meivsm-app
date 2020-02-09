@@ -35,6 +35,9 @@
             app:destination="@id/contactCreationFragment"
             app:enterAnim="@anim/fragment_fade_enter"
             app:exitAnim="@anim/fragment_fade_exit" />
+        <action
+            android:id="@+id/action_accountsFragment_to_accountManageFragment"
+            app:destination="@id/accountManageFragment" />
     </fragment>
 
     <fragment
@@ -46,11 +49,8 @@
             android:id="@+id/action_contractsFragment_to_crowdfundingFundingState"
             app:destination="@id/crowdfundingFundingState" />
         <action
-            android:id="@+id/action_contractsFragment_to_crowdfundingSuccessfulState"
-            app:destination="@id/crowdfundingSuccessfulState" />
-        <action
-            android:id="@+id/action_contractsFragment_to_crowdfundingFailedState"
-            app:destination="@id/crowdfundingFailedState" />
+            android:id="@+id/action_contractsFragment_to_crowdfundingEndState"
+            app:destination="@id/crowdfundingEndState" />
     </fragment>
     <fragment
         android:id="@+id/accountCreationFragment"
@@ -63,7 +63,7 @@
     </fragment>
     <fragment
         android:id="@+id/contactManageFragment"
-        android:name="com.aveyon.meivsm.ui.accounts.ContactManageFragment"
+        android:name="com.aveyon.meivsm.ui.accounts.contacts.ContactManageFragment"
         android:label="fragment_contact_creation"
         tools:layout="@layout/fragment_contact_manage" >
         <action
@@ -74,7 +74,7 @@
     </fragment>
     <fragment
         android:id="@+id/contactCreationFragment"
-        android:name="com.aveyon.meivsm.ui.accounts.ContactCreationFragment"
+        android:name="com.aveyon.meivsm.ui.accounts.contacts.ContactCreationFragment"
         android:label="fragment_contact_creation"
         tools:layout="@layout/fragment_contact_creation" />
     <fragment
@@ -87,18 +87,16 @@
             app:destination="@id/crowdfundingPayingFragment" />
     </fragment>
     <fragment
-        android:id="@+id/crowdfundingSuccessfulState"
-        android:name="com.aveyon.meivsm.ui.contracts.crowdfunding.CrowdfundingSuccessfulState"
-        android:label="fragment_crowdfunding_successful_state"
-        tools:layout="@layout/fragment_crowdfunding_successful_state" />
-    <fragment
-        android:id="@+id/crowdfundingFailedState"
-        android:name="com.aveyon.meivsm.ui.contracts.crowdfunding.CrowdfundingFailedState"
-        android:label="fragment_crowdfunding_failed_state"
-        tools:layout="@layout/fragment_crowdfunding_failed_state" />
+        android:id="@+id/crowdfundingEndState"
+        android:name="com.aveyon.meivsm.ui.contracts.crowdfunding.CrowdfundingEndStateFragment"
+        android:label="fragment_crowdfunding_end_state"
+        tools:layout="@layout/fragment_crowdfunding_end_state" />
 
 
-    <action android:id="@+id/action_global_contractsFragment" app:destination="@id/contractsFragment" />
+    <action
+        android:id="@+id/action_global_contractsFragment"
+        app:destination="@id/contractsFragment"
+        app:popUpTo="@+id/contractsFragment" />
     <fragment
         android:id="@+id/crowdfundingPayingFragment"
         android:name="com.aveyon.meivsm.ui.contracts.crowdfunding.CrowdfundingPayingFragment"
@@ -115,11 +113,29 @@
         tools:layout="@layout/fragment_crowdfunding_do_transaction" >
         <action
             android:id="@+id/action_crowdfundingDoTransactionFragment_to_crowdfundingDoneTransactionFragment"
-            app:destination="@id/crowdfundingDoneTransactionFragment" />
+            app:destination="@id/crowdfundingDoneTransactionFragment"
+            app:popUpTo="@+id/contractsFragment" />
+        <action
+            android:id="@+id/action_crowdfundingDoTransactionFragment_to_errorFragment"
+            app:destination="@id/errorFragment"
+            app:popUpTo="@+id/crowdfundingPayingFragment" />
     </fragment>
     <fragment
         android:id="@+id/crowdfundingDoneTransactionFragment"
         android:name="com.aveyon.meivsm.ui.contracts.crowdfunding.CrowdfundingDoneTransactionFragment"
         android:label="fragment_crowdfunding_done_transaction"
         tools:layout="@layout/fragment_crowdfunding_done_transaction" />
+    <fragment
+        android:id="@+id/errorFragment"
+        android:name="com.aveyon.meivsm.ui.ErrorFragment"
+        android:label="ErrorFragment" >
+        <argument
+            android:name="errorText"
+            app:argType="string"
+            android:defaultValue="Error occured" />
+    </fragment>
+    <fragment
+        android:id="@+id/accountManageFragment"
+        android:name="com.aveyon.meivsm.ui.accounts.AccountManageFragment"
+        android:label="AccountManageFragment" />
 </navigation>

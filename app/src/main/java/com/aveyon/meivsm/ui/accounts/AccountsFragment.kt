@@ -17,6 +17,7 @@ import com.aveyon.meivsm.ui.accounts.contacts.ContactAdapter
 import com.aveyon.meivsm.ui.accounts.contacts.ContactViewHolder
 
 class AccountsFragment : Fragment(), ContactViewHolder.AdapterItemClickListener {
+    val accountsViewModel: AccountsViewModel by activityViewModels()
 
     lateinit var viewManager: RecyclerView.LayoutManager
     lateinit var contactAdapter: ContactAdapter
@@ -32,7 +33,12 @@ class AccountsFragment : Fragment(), ContactViewHolder.AdapterItemClickListener 
             container, false
         )
 
-        val accountsViewModel: AccountsViewModel by activityViewModels()
+
+        // Set account that should be presented
+        accountsViewModel.accounts.observe(this) { accounts ->
+            if (accounts.isNotEmpty())
+                accountsViewModel.accountToPresent = accounts[0]
+        }
 
         // Assign the component to a property in the binding class.
         binding.viewModel = accountsViewModel
@@ -54,31 +60,36 @@ class AccountsFragment : Fragment(), ContactViewHolder.AdapterItemClickListener 
         return binding.root
     }
 
-    /**
-     * Click on an item in the contact recycler view
-     */
-    override fun onItemClick(view: View, position: Int) {
-        val accountsViewModel: AccountsViewModel by activityViewModels()
-        accountsViewModel.contactToUpdate = contactAdapter.dataSet[position]
-        onContactUpdate()
-    }
-
-    fun onAccountCreation() {
+    fun onNavToAccountCreation() {
         val action =
             AccountsFragmentDirections.actionNavigationAccountsToAccountCreationFragment()
         findNavController().navigate(action)
     }
 
-    fun onContactCreation() {
+    fun onNavToAccountUpdate() {
+        val action =
+            AccountsFragmentDirections.actionAccountsFragmentToAccountManageFragment()
+        findNavController().navigate(action)
+    }
+
+    fun onNavToContactCreation() {
         val action =
             AccountsFragmentDirections.actionAccountsFragmentToContactCreationFragment()
         findNavController().navigate(action)
     }
 
     /**
+     * Click on an item in the contact recycler view
+     */
+    override fun onItemClick(view: View, position: Int) {
+        accountsViewModel.contactToUpdate = contactAdapter.dataSet[position]
+        onNavToContactUpdate()
+    }
+
+    /**
      * When a Contact Needs to be updated
      */
-    fun onContactUpdate() {
+    fun onNavToContactUpdate() {
         val action =
             AccountsFragmentDirections.actionNavigationAccountsToContactManageFragment()
         findNavController().navigate(action)

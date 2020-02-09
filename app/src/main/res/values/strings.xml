@@ -10,6 +10,7 @@
     <string name="global_btn_update">Ändern</string>
     <string name="global_btn_delete">Löschen</string>
     <string name="global_btn_pay">Bezahlen</string>
+    <string name="global_btn_back">Zurück</string>
 
     <string name="global_contract_created">Erfolgreich ersteltl!</string>
     <string name="global_contract_created_desc">
@@ -78,21 +79,30 @@
     <string name="eoa_name_desc">Name des Accounts (Assoziation mit einer Adresse)</string>
     <string name="eoa_pub_addr">Öffentliche Addresse</string>
     <string name="eoa_pub_addr_desc">Öffentliche Addresse des Ethereum Accounts</string>
-    <string name="eoa_priv_key">Öffentliche Addresse des Ethereum Accounts</string>
+    <string name="eoa_priv_key">Private Addresse des Ethereum Accounts</string>
     <string name="eoa_priv_key_desc">Zum Signieren der Nachrichten benötigt</string>
+    <string name="eoa_created">Konto wurde erstellt</string>
+    <!-- Accounts Manage Fragment-->
+    <string name="eoa_updated">Konto wurde aktualisiert</string>
+    <string name="eoa_delete">Konto löschen</string>
+    <string name="eoa_deleted">Konto wurde gelöscht</string>
 
 
     <!-- (My)Contracts Fragment-->
     <string name="contracts_header">Meine Verträge</string>
 
     <!-- Crowdfunding Contract Interaction -->
-    <string name="crowdfunding_sum_to_goal">%1$s %2$s bereits erhalten</string>
+    <string name="crowdfunding_sum_to_goal">%1$s / %2$s Ether erhalten</string>
     <string name="crowdfunding_active_till_end_date">Läuft noch bis zum %1$s</string>
     <string name="crowdfunding_ended_on_date">Geendet am %1$s</string>
     <string name="crowdfunding_started_date">Gestartet am %1$s</string>
     <string name="crowdfunding_pay_btn">Am Projekt beteiligen</string>
     <string name="crowdfunding_successful">Projekt erfogleichreich finanziert</string>
+    <string name="crowdfunding_successful_desc">
+        Das Kapital wird an die im Smart Contract hinterlegte Adresse überwiesen
+    </string>
     <string name="crowdfunding_failed">Projektfinanzierung fehlgeschlagen</string>
+    <string name="crowdfunding_failed_desc">Das Projekt konnte leider nicht im angegebenen Zeitraum erfolgreich finanziert werden</string>
     <string name="crowdfunding_pay_desc">Gib einen Betrag an, mit dem du dich am Projekt beteiligen möchtest</string>
     <string name="crowdfunding_pay_value">Betrag</string>
     <string name="crowdfunding_pay_value_hint">Preis</string>
@@ -108,7 +118,9 @@
 
 
     <!-- ERRORS-->
+    <string name="error">Es ist ein Fehler aufgetreten</string>
     <string name="error_noaccounts">Kein Konto gefunden. Erstelle ein Konto, um fortzufahren</string>
+    <string name="error_invalid_number">Keine gültige Betrag. Mind. %1$d, max. %2$d Stellen</string>
 
     <string name="hello_blank_fragment">adasdasdas</string>
 

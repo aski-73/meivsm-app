@@ -1,6 +1,7 @@
 package com.aveyon.meivsm.ui.contracts
 
 import android.app.Application
+import android.util.Log
 import androidx.lifecycle.*
 import androidx.navigation.ActionOnlyNavDirections
 import androidx.navigation.NavDirections
@@ -19,25 +20,20 @@ class ContractsViewModel(
 ) :
     AndroidViewModel(application) {
 
-    var contracts: MutableLiveData<List<GenericContractInterface>> = MutableLiveData()
+    var contracts: LiveData<List<GenericContractInterface>> = liveData {
+        var accounts = AppDatabase.getDatabase(
+            getApplication(), viewModelScope
+        ).appDao().loadAllEOAs()
+
+        if (accounts.isNotEmpty()) {
+            // for simplicity provide the first EOA for blockchain discovery service
+            emit(blockchainDiscovery.getAllContracts(accounts[0]))
+        }
+    }
 
     private val blockchainDiscovery = ServiceLocator.blockchainDiscovery()
 
     lateinit var selectedContract: GenericContractInterface
-
-    init {
-        // Run DB Operation in another thread
-        viewModelScope.launch {
-            var accounts = AppDatabase.getInstance(
-                getApplication()
-            ).appDao().loadAllEOAs()
-
-            if (accounts.isNotEmpty()) {
-                // for simplicity provide the first EOA for blockchain discovery service
-                contracts.postValue(blockchainDiscovery.getAllContracts(accounts[0]))
-            }
-        }
-    }
 
     /**
      * Determine next {@see NavDirections} by contract state
@@ -47,8 +43,8 @@ class ContractsViewModel(
     suspend fun getCrowdfundingAction(contract: GenericContractInterface): NavDirections =
         withContext(Dispatchers.IO) {
 
-            var accounts = AppDatabase.getInstance(
-                getApplication()
+            var accounts = AppDatabase.getDatabase(
+                getApplication(), viewModelScope
             ).appDao().loadAllEOAs()
 
             if (accounts.isEmpty())
@@ -68,11 +64,11 @@ class ContractsViewModel(
                 }
                 "SUCCESSFUL" -> {
                     navDirection =
-                        ContractsFragmentDirections.actionContractsFragmentToCrowdfundingSuccessfulState()
+                        ContractsFragmentDirections.actionContractsFragmentToCrowdfundingEndState()
                 }
                 "FAILED" -> {
                     navDirection =
-                        ContractsFragmentDirections.actionContractsFragmentToCrowdfundingFailedState()
+                        ContractsFragmentDirections.actionContractsFragmentToCrowdfundingEndState()
                 }
                 else -> {
                     navDirection = ActionOnlyNavDirections(R.id.action_global_contractsFragment)

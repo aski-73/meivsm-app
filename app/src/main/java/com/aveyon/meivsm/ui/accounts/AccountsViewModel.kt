@@ -26,21 +26,31 @@ class AccountsViewModel(appplication: Application) : AndroidViewModel(appplicati
     }
 
     /**
+     * EOA which gets displayed in {@link AccountsFragment} (if exists)
+     */
+    var accountToPresent: ExternallyOwnedAccount = ExternallyOwnedAccount(-1)
+
+    /**
      * Object represents User Input in {@link AccountCreationFragment} set via two way data binding
      */
     var accountToCreate: ExternallyOwnedAccount = ExternallyOwnedAccount()
 
     /**
+     * Object represents User Input in {@link AccountManageFragment} set via two way data binding
+     */
+    var accountToUpdate: ExternallyOwnedAccount = ExternallyOwnedAccount(-1)
+
+    /**
      * Objekt represent User input in {@link ContactManageFragment} set via two way data binding
      */
-    val contactToCreate: Contact = Contact()
+    val contactToCreate: Contact = Contact(-1)
 
     var contactToUpdate: Contact = Contact(-1)
 
-    val dao: AppDao = AppDatabase.getInstance(getApplication()).appDao()
+    val dao: AppDao = AppDatabase.getDatabase(getApplication(), viewModelScope).appDao()
 
 
-    fun createAccount() {
+    suspend fun createAccount() {
         Log.d("AccountsViewModel", accountToCreate.toString())
 //        if (!isValidRegularName(accountToCreate.name)
 //            || !isValidPublicAddress(accountToCreate.publicAddress)
@@ -49,8 +59,18 @@ class AccountsViewModel(appplication: Application) : AndroidViewModel(appplicati
 //            return
 //        }
 
+        dao.insertEOA(accountToCreate)
+    }
+
+    fun updateAccount() {
         viewModelScope.launch {
-            dao.insertEOA(accountToCreate)
+            dao.updateEOA(accountToUpdate)
+        }
+    }
+
+    fun deleteAccount() {
+        viewModelScope.launch {
+            dao.deleteEOA(accountToUpdate)
         }
     }
 

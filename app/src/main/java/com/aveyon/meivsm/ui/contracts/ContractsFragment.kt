@@ -62,10 +62,10 @@ class ContractsFragment : Fragment(), ContractViewHolder.AdapterItemClickListene
         // Start coroutine (not blocking main thread)
         lifecycleScope.launch {
             // TODO implement more contract categories
+            viewModel.selectedContract = contractAdapter.dataSet[position]
             when (contractAdapter.dataSet[position].category) {
                 ContractCategoriesEnum.CROWDFUNDING.value -> {
                     val action = viewModel.getCrowdfundingAction(contractAdapter.dataSet[position])
-                    Log.d(javaClass.name, action.toString())
                     findNavController().navigate(action)
                 }
             }

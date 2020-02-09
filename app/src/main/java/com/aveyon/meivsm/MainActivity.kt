@@ -8,12 +8,14 @@ import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
+import com.aveyon.meivsm.ui.CrowdfundingFragmentsInteractionListener
 import com.aveyon.meivsm.ui.accounts.AccountCreationFragment
-import com.aveyon.meivsm.ui.accounts.ContactCreationFragment
-import com.aveyon.meivsm.ui.accounts.ContactManageFragment
+import com.aveyon.meivsm.ui.accounts.contacts.ContactCreationFragment
+import com.aveyon.meivsm.ui.accounts.contacts.ContactManageFragment
 
-class MainActivity : AppCompatActivity(), AccountCreationFragment.OnFragmentInteractionListener,
-    ContactManageFragment.OnFragmentInteractionListener, ContactCreationFragment.OnFragmentInteractionListener {
+class MainActivity : AppCompatActivity(),
+    ContactCreationFragment.OnFragmentInteractionListener,
+    CrowdfundingFragmentsInteractionListener {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -43,5 +45,9 @@ class MainActivity : AppCompatActivity(), AccountCreationFragment.OnFragmentInte
                 navView.visibility = View.VISIBLE
             }
         }
+    }
+
+    override fun onCancelCrowdfundingFragment() {
+        findNavController(R.id.nav_host_fragment).navigate(R.id.action_global_contractsFragment)
     }
 }

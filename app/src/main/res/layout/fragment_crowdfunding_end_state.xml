@@ -5,16 +5,16 @@
 
     <data>
         <variable name="viewModel" type="com.aveyon.meivsm.ui.contracts.crowdfunding.CrowdfundingViewModel"/>
-        <variable name="fragment" type="com.aveyon.meivsm.ui.contracts.crowdfunding.CrowdfundingFundingStateFragment"/>
+        <variable name="fragment" type="com.aveyon.meivsm.ui.contracts.crowdfunding.CrowdfundingEndStateFragment"/>
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".ui.contracts.crowdfunding.CrowdfundingFundingStateFragment">
+        tools:context=".ui.contracts.crowdfunding.CrowdfundingEndStateFragment">
 
         <ImageView
-            android:id="@+id/imageView4"
+            android:id="@+id/imageView"
             android:layout_width="match_parent"
             android:layout_height="165dp"
             android:layout_marginStart="8dp"
@@ -27,7 +27,7 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
-            android:id="@+id/textView8"
+            android:id="@+id/textView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="27dp"
@@ -35,62 +35,72 @@
             android:textSize="30sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/imageView4" />
+            app:layout_constraintTop_toBottomOf="@+id/imageView" />
 
         <TextView
-            android:id="@+id/textView9"
+            android:id="@+id/crowdfunding_end_header"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="32dp"
+            android:layout_marginTop="32dp"
+            android:layout_marginEnd="32dp"
+            android:fontFamily="@font/roboto_bold"
+            android:text="@string/crowdfunding_failed"
+            android:textSize="24sp"
+            app:crowdfundingHeader="@{viewModel.state}"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView" />
+
+        <TextView
+            android:id="@+id/crowdfunding_end_desc"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="32dp"
+            android:layout_marginEnd="8dp"
+            android:fontFamily="@font/roboto"
+            android:text="@string/crowdfunding_failed_desc"
+            android:textSize="18sp"
+            app:crowdfundingDesc="@{viewModel.state}"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/crowdfunding_end_header" />
+
+        <TextView
+            android:id="@+id/crowdfunding_sum_to_goal"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
-            android:layout_marginTop="56dp"
+            android:layout_marginTop="47dp"
+            android:fontFamily="@font/roboto_bold"
             android:text="@string/crowdfunding_sum_to_goal"
             app:goal="@{viewModel.goal}"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView8"
+            app:layout_constraintTop_toBottomOf="@+id/crowdfunding_end_desc"
             app:sum="@{viewModel.sum}" />
 
         <TextView
-            android:id="@+id/textView10"
+            android:id="@+id/crowdfunding"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
             android:layout_marginTop="32dp"
-            android:text="@string/crowdfunding_active_till_end_date"
+            android:fontFamily="@font/roboto_bold"
+            android:text="@string/crowdfunding_ended_on_date"
             app:endDate="@{viewModel.endDate}"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView9" />
-
-        <TextView
-            android:id="@+id/textView11"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="32dp"
-            android:text="@string/crowdfunding_started_date"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView10" />
+            app:layout_constraintTop_toBottomOf="@+id/crowdfunding_sum_to_goal" />
 
         <Button
-            android:id="@+id/button"
+            android:id="@+id/button4"
             android:layout_width="@dimen/global_btn_width"
             android:layout_height="@dimen/global_btn_height"
             android:layout_marginBottom="80dp"
-            android:text="@string/crowdfunding_pay_btn"
-            android:onClick="@{() -> fragment.onClickPayButton()}"
+            android:text="@string/global_btn_back"
+            android:onClick="@{() -> fragment.back()}"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent" />
-
-        <Button
-            android:id="@+id/button2"
-            style="@style/Widget.AppCompat.Button.Borderless"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="24dp"
-            android:text="@string/global_btn_cancel"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent" />
-
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

@@ -33,17 +33,11 @@ class BlockchainDiscoveryIT {
 
     lateinit var crowdfundingContract: CrowdfundingContract
 
-    private val registryContractAddr = "0xD1756Acb47e6799E90d1773C7864416dF427A344"
+    private val registryContractAddr = "0x30295589F89103B2abFA1cffe7556dE9c5Ad308C"
 
     lateinit var logger: Logger
 
     private val gasProvider = StaticGasProvider(BigInteger("1"), BigInteger("6721975"))
-
-    /**
-     * Address to a deployed crowdfunding contract (TODO: deploy contract before every test run
-     * instead of having a predefined value)
-     */
-    val crowdAddr = "0xD635bCD5475C970A272f3aD54640EA2Fc9C63bD4"
 
     /**
      * EOA on test node
@@ -51,8 +45,8 @@ class BlockchainDiscoveryIT {
     var eoa = ExternallyOwnedAccount(
         0,
         "notrelevant",
-        "0x7F181DeF2E46196a239aC423a2b77e2E6A4d54a6",
-        "68e7c21353103efe69c8b521fbd39fb810476b76d9e28caa0a0cca1d9a467493"
+        "0x60696E2f6bd0f26386eF6BC23658c43334a9bD76",
+        "4fe33962a4b49a7490cf29958468a78c391f10cd70983ce17d9e4d5df949d8d7"
     )
 
     @Before
@@ -80,7 +74,7 @@ class BlockchainDiscoveryIT {
             Credentials.create(eoa.privateKey),
             gasProvider
         )
-        var wei: BigInteger = BigInteger(Convert.toWei("5", Convert.Unit.ETHER).toString())
+        val wei  = BigInteger(Convert.toWei("5", Convert.Unit.ETHER).toString())
         registryContract.register(
             crowdfundingContract.contractAddress,
             BigInteger(Date().time.toString()),
@@ -98,7 +92,7 @@ class BlockchainDiscoveryIT {
             Credentials.create(eoa.privateKey),
             gasProvider
         )
-        var wei: BigInteger = BigInteger(Convert.toWei("5", Convert.Unit.ETHER).toString())
+        val wei = BigInteger(Convert.toWei("5", Convert.Unit.ETHER).toString())
         registryContract.remove(crowdfundingContract.contractAddress, wei).sendAsync().get()
     }
 

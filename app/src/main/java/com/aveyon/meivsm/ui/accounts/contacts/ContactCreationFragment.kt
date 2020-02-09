@@ -1,4 +1,4 @@
-package com.aveyon.meivsm.ui.accounts
+package com.aveyon.meivsm.ui.accounts.contacts
 
 import android.content.Context
 import android.os.Bundle
@@ -10,6 +10,7 @@ import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.activityViewModels
 import com.aveyon.meivsm.R
 import com.aveyon.meivsm.databinding.FragmentContactCreationBinding
+import com.aveyon.meivsm.ui.accounts.AccountsViewModel
 
 /**
  * A simple [Fragment] subclass.

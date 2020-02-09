@@ -4,13 +4,15 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
-        <variable name="viewModel" type="com.aveyon.meivsm.ui.accounts.AccountsViewModel"></variable>
+        <variable
+            name="viewModel"
+            type="com.aveyon.meivsm.ui.accounts.AccountsViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".ui.accounts.ContactCreationFragment">
+        tools:context=".ui.accounts.contacts.ContactCreationFragment">
 
         <!-- Text attributes like in account  creation fragment-->
         <com.google.android.material.textfield.TextInputLayout
@@ -25,7 +27,7 @@
             app:helperText="@string/eoa_name_desc"
             app:hintAnimationEnabled="true"
             app:hintEnabled="true"
-            app:isRegularName="@{viewModel.accountToCreate.name}"
+            app:isRegularName="@{viewModel.contactToCreate.name}"
             app:layout_constrainedWidth="false"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -64,11 +66,11 @@
         </com.google.android.material.textfield.TextInputLayout>
 
         <Button
-            android:onClick="@{() -> viewModel.createContact()}"
             android:id="@+id/eoa_creation_done"
             android:layout_width="@dimen/global_btn_width"
             android:layout_height="@dimen/global_btn_height"
             android:layout_marginBottom="80dp"
+            android:onClick="@{() -> viewModel.createContact()}"
             android:text="@string/global_btn_create"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"

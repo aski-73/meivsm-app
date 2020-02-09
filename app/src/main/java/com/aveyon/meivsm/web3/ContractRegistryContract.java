@@ -54,7 +54,7 @@ public class ContractRegistryContract extends Contract {
 
     static {
         _addresses = new HashMap<String, String>();
-        _addresses.put("5777", "0xD1756Acb47e6799E90d1773C7864416dF427A344");
+        _addresses.put("5777", "0x0943070562b0B26a6B02475933f9901a19043B22");
     }
 
     @Deprecated

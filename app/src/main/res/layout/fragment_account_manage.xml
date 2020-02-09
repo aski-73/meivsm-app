@@ -4,23 +4,18 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
-
-        <variable
-            name="fragment"
-            type="com.aveyon.meivsm.ui.accounts.AccountCreationFragment" />
-
-        <variable
-            name="viewModel"
-            type="com.aveyon.meivsm.ui.accounts.AccountsViewModel" />
+        <variable name="fragment" type="com.aveyon.meivsm.ui.accounts.AccountManageFragment"/>
+        <variable name="viewModel" type="com.aveyon.meivsm.ui.accounts.AccountsViewModel"/>
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".ui.accounts.AccountCreationFragment">
+        tools:context=".ui.accounts.contacts.ContactManageFragment">
 
+        <!-- Text attributes like in account  creation fragment-->
         <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/eoa_name_label"
+            android:id="@+id/account_name_label"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="10dp"
@@ -31,7 +26,7 @@
             app:helperText="@string/eoa_name_desc"
             app:hintAnimationEnabled="true"
             app:hintEnabled="true"
-            app:isRegularName="@{viewModel.accountToCreate.name}"
+            app:isRegularName="@{viewModel.accountToUpdate.name}"
             app:layout_constrainedWidth="false"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -39,16 +34,18 @@
             app:layout_constraintWidth_default="spread">
 
             <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/eoa_name"
+                android:id="@+id/account_name"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:inputType="textShortMessage|textAutoComplete"
-                android:text="@={viewModel.accountToCreate.name}" />
+                android:text="@={viewModel.accountToUpdate.name}" />
 
         </com.google.android.material.textfield.TextInputLayout>
 
+        <!-- Text attributes like in account  creation fragment-->
+
         <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/eoa_pub_addr_label"
+            android:id="@+id/account_pub_addr_label"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="10dp"
@@ -57,15 +54,14 @@
             android:hint="@string/eoa_pub_addr"
             app:helperText="@string/eoa_pub_addr_desc"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/eoa_name_label">
+            app:layout_constraintTop_toBottomOf="@+id/account_name_label">
 
             <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/eoa_pub_addr"
+                android:id="@+id/contact_pub_addr"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@={viewModel.accountToCreate.publicAddress}" />
+                android:text="@={viewModel.accountToUpdate.publicAddress}" />
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
@@ -79,22 +75,36 @@
             app:helperText="@string/eoa_priv_key_desc"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/eoa_pub_addr_label">
+            app:layout_constraintTop_toBottomOf="@+id/account_pub_addr_label">
 
             <com.google.android.material.textfield.TextInputEditText
+                android:text="@={viewModel.accountToUpdate.privateKey}"
                 android:id="@+id/eoa_priv_key"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="@={viewModel.accountToCreate.privateKey}" />
+                android:layout_height="wrap_content" />
         </com.google.android.material.textfield.TextInputLayout>
+
+
+        <Button
+            android:id="@+id/eoa_delete"
+            style="@style/Widget.AppCompat.Button.Borderless"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="44dp"
+            android:text="@string/eoa_delete"
+            android:textColor="#DF2925"
+            android:onClick="@{() -> fragment.onAccountDelete()}"
+            app:layout_constraintBottom_toTopOf="@+id/eoa_creation_done"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
 
         <Button
             android:id="@+id/eoa_creation_done"
-            android:layout_width="164dp"
-            android:layout_height="79dp"
-            android:layout_marginBottom="80dp"
-            android:onClick="@{() -> fragment.onAccountCreate()}"
-            android:text="@string/global_btn_create"
+            android:layout_width="@dimen/global_btn_width"
+            android:layout_height="@dimen/global_btn_height"
+            android:layout_marginBottom="120dp"
+            android:onClick="@{() -> fragment.onAccountUpdate()}"
+            android:text="@string/global_btn_update"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent" />
