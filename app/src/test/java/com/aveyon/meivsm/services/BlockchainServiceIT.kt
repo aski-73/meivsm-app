@@ -20,7 +20,7 @@ import java.util.*
 /**
  * Integrationtest between BlockchainDiscovery, RegistryContract and Ethereum Node (Ganache)/ Blockchain
  */
-class BlockchainDiscoveryIT {
+class BlockchainServiceIT {
 
     /**
      * Remote ethereum node
@@ -29,7 +29,7 @@ class BlockchainDiscoveryIT {
 
     private val web3 = Web3j.build(HttpService(ETH_NODE))
 
-    lateinit var testSubject: BlockchainDiscovery
+    lateinit var testSubject: BlockchainService
 
     lateinit var crowdfundingContract: CrowdfundingContract
 
@@ -51,7 +51,7 @@ class BlockchainDiscoveryIT {
 
     @Before
     fun setUp() {
-        testSubject = BlockchainDiscovery()
+        testSubject = BlockchainService()
         logger = LoggerFactory.getLogger(javaClass)
 
         val balance = web3.ethGetBalance(
@@ -85,7 +85,7 @@ class BlockchainDiscoveryIT {
 
     @After
     fun tearDown() {
-        // register deployed contract in registryContract
+        // remove deployed contract in registryContract
         val registryContract = ContractRegistryContract.load(
             registryContractAddr,
             web3,
@@ -136,21 +136,22 @@ class BlockchainDiscoveryIT {
     @Test
     fun getContractCategoryReturnsCrowdfundingCategory() = runBlockingTest {
         // GIVEN
-
+        var contractAddr = crowdfundingContract.contractAddress ?: ""
         // WHEN
-        var category = testSubject.getContractCategory(crowdfundingContract.contractAddress, eoa)
+        var category = testSubject.getContractCategory(contractAddr, eoa)
 
         // THEN
-        assertEquals(category, "crowdfunding")
+        assertEquals("crowdfunding", category)
     }
 
     @Test
     fun getContractReturnsCrowdfundingContract() = runBlockingTest {
         // GIVEN
+        var contractAddr = crowdfundingContract.contractAddress ?: ""
 
         // WHEN
         var contract =
-            testSubject.getContract(crowdfundingContract.contractAddress, "crowdfunding", eoa)
+            testSubject.getContract(contractAddr, "crowdfunding", eoa)
 
         // THEN
         assert(contract is CrowdfundingContract)
