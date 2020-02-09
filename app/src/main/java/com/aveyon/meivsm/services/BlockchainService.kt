@@ -22,7 +22,7 @@ import java.util.*
 /**
  * Manages Connection and rpc calls to remote ethereum node
  */
-class BlockchainDiscovery {
+class BlockchainService {
     /**
      * Remote ethereum node
      */
