@@ -56,6 +56,8 @@ class CrowdfundingDoTransactionFragment : Fragment() {
     override fun onStart() {
         super.onStart()
         var exceptionHandler = CoroutineExceptionHandler { _, exception ->
+            Log.d(javaClass.name, exception.stackTrace.toString())
+            exception.printStackTrace()
             var action =
                 CrowdfundingDoTransactionFragmentDirections.actionCrowdfundingDoTransactionFragmentToErrorFragment(
                     exception.message.toString()

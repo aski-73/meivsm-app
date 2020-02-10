@@ -58,6 +58,7 @@ class CrowdfundingViewModel(var contract: CrowdfundingContract) : ViewModel() {
         } else { // else 'wei'. no other units supported at the moment
             weiValue = BigInteger(payValue)
         }
+        Log.d(javaClass.name, weiValue.toString())
         contract.handle("pay*", weiValue).send()
     }
 }

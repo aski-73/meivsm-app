@@ -5,15 +5,12 @@ import android.os.Bundle
 import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.findNavController
-import androidx.navigation.ui.AppBarConfiguration
 
 import com.aveyon.meivsm.R
 
-class CrowdfundingActivity : AppCompatActivity(), Crowdfunding1.OnFragmentInteractionListener,
-    Crowdfunding2.OnFragmentInteractionListener, Crowdfunding3.OnFragmentInteractionListener,
+class CrowdfundingActivity : AppCompatActivity(), Crowdfunding1Fragment.OnFragmentInteractionListener,
+    Crowdfunding2Fragment.OnFragmentInteractionListener, Crowdfunding3Fragment.OnFragmentInteractionListener,
     Crowdfunding4.OnFragmentInteractionListener {
-
-    private lateinit var appBarConfiguration: AppBarConfiguration
 
     private var TAG: String = "CrowdfundingActivity"
 

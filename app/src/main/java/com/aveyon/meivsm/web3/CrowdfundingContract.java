@@ -1,7 +1,5 @@
 package com.aveyon.meivsm.web3;
 
-import com.aveyon.meivsm.interfaces.GenericContractInterface;
-
 import java.math.BigInteger;
 import java.util.Arrays;
 import java.util.Collections;

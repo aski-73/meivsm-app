@@ -1,148 +1,157 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".ui.home.crowdfunding.Crowdfunding1">
+    xmlns:tools="http://schemas.android.com/tools">
 
-    <ImageView
-        android:id="@+id/imageView"
-        android:layout_width="414dp"
-        android:layout_height="120dp"
-        app:srcCompat="@drawable/ic_crowdfunding"
-        android:textAlignment="center"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+    <data>
+        <variable name="viewModel" type="com.aveyon.meivsm.ui.home.crowdfunding.CrowdfundingCreationViewModel"/>
+    </data>
 
-    <TextView
-        android:id="@+id/crowdfunding_creation_header"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="14dp"
-        android:fontFamily="@font/roboto_bold"
-        android:text="@string/crowdfunding_creation_header"
-        android:textAlignment="center"
-        android:textSize="24sp"
-        app:layout_constraintBottom_toTopOf="@+id/crowdfunding_creation_subheader"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView" />
-
-    <TextView
-        android:id="@+id/crowdfunding_creation_subheader"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="14dp"
-        android:text="@string/crowdfunding_creation_subheader"
-        android:textAlignment="center"
-        android:textSize="24sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.507"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/crowdfunding_creation_header" />
-
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/eoa_name_label"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="10dp"
-        android:layout_marginTop="45dp"
-        android:layout_marginEnd="10dp"
-        android:hint="@string/crowdfunding_title"
-        app:errorEnabled="true"
-        app:helperText="Was soll finanziert werden?"
-        app:hintAnimationEnabled="true"
-        app:hintEnabled="true"
-        app:layout_constrainedWidth="false"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/crowdfunding_creation_subheader"
-        app:layout_constraintWidth_default="spread">
-
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/eoa_name"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:inputType="textShortMessage|textAutoComplete" />
-
-    </com.google.android.material.textfield.TextInputLayout>
-
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/crowdfunding_goal_label"
-        android:layout_width="213dp"
-        android:layout_height="68dp"
-        android:layout_marginStart="10dp"
-        android:layout_marginTop="25dp"
-        android:hint="@string/crowdfunding_goal"
-        app:helperText="Ganzzahlen"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/eoa_name_label">
-
-        <EditText
-            android:id="@+id/crowdfunding_goal"
-            android:layout_width="206dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:baselineAligned="false"
-            android:ems="10"
-            android:inputType="number" />
-
-    </com.google.android.material.textfield.TextInputLayout>
-
-    <Spinner
-        android:id="@+id/crowdfunding_unit_spinner"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_marginTop="25dp"
-        android:layout_marginEnd="10dp"
-        app:layout_constraintBottom_toTopOf="@+id/crowdfunding_endDate_label"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/crowdfunding_goal_label"
-        app:layout_constraintTop_toBottomOf="@+id/eoa_name_label" />
-
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/crowdfunding_endDate_label"
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="10dp"
-        android:layout_marginTop="25dp"
-        android:layout_marginEnd="10dp"
-        android:hint="@string/crowdfunding_end_date"
-        app:helperText="Im Format DD-MM-YYYY"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/crowdfunding_goal_label">
+        android:layout_height="match_parent"
+        tools:context=".ui.home.crowdfunding.Crowdfunding1Fragment">
 
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/crowdfunding_endDate"
+        <ImageView
+            android:id="@+id/imageView"
+            android:layout_width="414dp"
+            android:layout_height="120dp"
+            app:srcCompat="@drawable/ic_crowdfunding"
+            android:textAlignment="center"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/crowdfunding_creation_header"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="14dp"
+            android:fontFamily="@font/roboto_bold"
+            android:text="@string/crowdfunding_creation_header"
+            android:textAlignment="center"
+            android:textSize="24sp"
+            app:layout_constraintBottom_toTopOf="@+id/crowdfunding_creation_subheader"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/imageView" />
+
+        <TextView
+            android:id="@+id/crowdfunding_creation_subheader"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="14dp"
+            android:text="@string/crowdfunding_creation_subheader"
+            android:textAlignment="center"
+            android:textSize="24sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.507"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/crowdfunding_creation_header" />
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/eoa_name_label"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="45dp"
+            android:layout_marginEnd="10dp"
+            android:hint="@string/crowdfunding_title"
+            app:errorEnabled="true"
+            app:helperText="Was soll finanziert werden?"
+            app:hintAnimationEnabled="true"
+            app:hintEnabled="true"
+            app:layout_constrainedWidth="false"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/crowdfunding_creation_subheader"
+            app:layout_constraintWidth_default="spread">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/eoa_name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="textShortMessage|textAutoComplete"
+                android:text="@={viewModel.templateParameters.title}"/>
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/crowdfunding_goal_label"
+            android:layout_width="213dp"
+            android:layout_height="68dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="25dp"
+            android:hint="@string/crowdfunding_goal"
+            app:helperText="Ganzzahlen"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/eoa_name_label">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/crowdfunding_goal"
+                android:layout_width="206dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:baselineAligned="false"
+                android:ems="10"
+                android:inputType="number"
+                android:text="@={viewModel.templateParameters.goal}"/>
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <Spinner
+            android:id="@+id/crowdfunding_unit_spinner"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginTop="25dp"
+            android:layout_marginEnd="10dp"
+            app:layout_constraintBottom_toTopOf="@+id/crowdfunding_endDate_label"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/crowdfunding_goal_label"
+            app:layout_constraintTop_toBottomOf="@+id/eoa_name_label" />
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/crowdfunding_endDate_label"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:inputType="date" />
-    </com.google.android.material.textfield.TextInputLayout>
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="25dp"
+            android:layout_marginEnd="10dp"
+            android:hint="@string/crowdfunding_end_date"
+            app:helperText="Im Format DD.MM.YYYY"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="1.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/crowdfunding_goal_label">
 
-    <Button
-        android:id="@+id/crowdfunding_next1"
-        android:layout_width="164dp"
-        android:layout_height="79dp"
-        android:layout_marginBottom="80dp"
-        android:text="@string/global_btn_next"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/crowdfunding_endDate"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="date" />
+        </com.google.android.material.textfield.TextInputLayout>
 
-    <Button
-        android:id="@+id/crowdfunding_cancel"
-        style="@style/Widget.AppCompat.Button.Borderless"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="26dp"
-        android:text="@string/global_btn_cancel"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        <Button
+            android:id="@+id/crowdfunding_next1"
+            android:layout_width="164dp"
+            android:layout_height="79dp"
+            android:layout_marginBottom="80dp"
+            android:text="@string/global_btn_next"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+        <Button
+            android:id="@+id/crowdfunding_cancel"
+            style="@style/Widget.AppCompat.Button.Borderless"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="26dp"
+            android:text="@string/global_btn_cancel"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

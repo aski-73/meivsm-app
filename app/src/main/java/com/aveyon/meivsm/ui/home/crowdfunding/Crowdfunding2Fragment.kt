@@ -7,69 +7,26 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.AdapterView
 import com.aveyon.meivsm.R
 
 import android.widget.ArrayAdapter
 import android.widget.Button
 import android.widget.Spinner
+import androidx.databinding.DataBindingUtil
+import androidx.fragment.app.activityViewModels
 import androidx.navigation.findNavController
+import com.aveyon.meivsm.databinding.FragmentCrowdfunding2Binding
+import androidx.lifecycle.observe
+import com.aveyon.meivsm.db.AccountInterface
+import java.util.*
+import kotlin.collections.ArrayList
 
-
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
-
-/**
- * A simple [Fragment] subclass.
- * Activities that contain this fragment must implement the
- * [Crowdfunding2.OnFragmentInteractionListener] interface
- * to handle interaction events.
- * Use the [Crowdfunding2.newInstance] factory method to
- * create an instance of this fragment.
- */
-class Crowdfunding2 : Fragment() {
-    // TODO: Rename and change types of parameters
-    private var param1: String? = null
-    private var param2: String? = null
+class Crowdfunding2Fragment : Fragment() {
     private var listener: OnFragmentInteractionListener? = null
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
-        }
-    }
+    private val viewModel: CrowdfundingCreationViewModel by activityViewModels()
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        // Inflate the layout for this fragment
-        var fragment = inflater.inflate(R.layout.fragment_crowdfunding2, container, false)
-
-        val spinner = fragment.findViewById<Spinner>(R.id.crowdfunding_receiver_spinner)
-        val ADDRESSES: Array<String> = arrayOf("Wert1", "Wert2")
-        val adapter = ArrayAdapter(
-            context,
-            android.R.layout.simple_spinner_item,
-            ADDRESSES
-        )
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
-        spinner.adapter = adapter
-
-        fragment.findViewById<Button>(R.id.crowdfunding_next2).setOnClickListener {
-            var action = Crowdfunding2Directions.actionCrowdfunding2ToCrowdfunding3()
-            fragment.findNavController().navigate(action)
-        }
-
-        fragment.findViewById<Button>(R.id.crowdfunding_cancel).setOnClickListener{
-            listener?.onCancelContractCreation()
-        }
-
-        return fragment
-    }
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
@@ -78,6 +35,74 @@ class Crowdfunding2 : Fragment() {
         } else {
             throw RuntimeException(context.toString() + " must implement OnFragmentInteractionListener")
         }
+    }
+
+
+    override fun onCreateView(
+        inflater: LayoutInflater, container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
+        // Inflate the layout for this fragment
+        var binding = DataBindingUtil.inflate<FragmentCrowdfunding2Binding>(
+            inflater,
+            R.layout.fragment_crowdfunding2,
+            container,
+            false
+        )
+
+        // Create a spinner containing all accounts and contacts
+        val spinner = binding.root.findViewById<Spinner>(R.id.crowdfunding_receiver_spinner)
+        viewModel.accounts.observe(this) { accounts ->
+
+            viewModel.contacts.observe(this) { contacts ->
+                // Put all objects of type AccountInterface into an array in order to display
+                // them in the spinner. The adapter holds references to the objects. When displaying
+                // them their toString() method gets called
+                var items: Array<AccountInterface> =
+                    arrayOf(*accounts.toTypedArray(), *contacts.toTypedArray())
+
+                val adapter = ArrayAdapter(
+                    context,
+                    android.R.layout.simple_spinner_item,
+                    items
+                )
+                adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+                spinner.adapter = adapter
+            }
+
+        }
+
+        spinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+            override fun onNothingSelected(parent: AdapterView<*>?) {
+                viewModel.templateParameters.receiver = "No Address"
+                // TODO error meldung
+            }
+
+            override fun onItemSelected(
+                parent: AdapterView<*>?,
+                view: View?,
+                position: Int,
+                id: Long
+            ) {
+                if (spinner.adapter.getItem(position) != null) {
+                    // Since the items store references to objects of Accountinterface
+                    // they can be easily retrieved
+                    viewModel.templateParameters.receiver =
+                        (spinner.adapter.getItem(position) as AccountInterface).publicAddress
+                }
+            }
+        }
+
+        binding.root.findViewById<Button>(R.id.crowdfunding_next2).setOnClickListener {
+            var action = Crowdfunding2FragmentDirections.actionCrowdfunding2ToCrowdfunding3()
+            binding.root.findNavController().navigate(action)
+        }
+
+        binding.root.findViewById<Button>(R.id.crowdfunding_cancel).setOnClickListener {
+            listener?.onCancelContractCreation()
+        }
+
+        return binding.root
     }
 
     override fun onDetach() {
@@ -99,25 +124,5 @@ class Crowdfunding2 : Fragment() {
     interface OnFragmentInteractionListener {
         fun onFragmentInteraction(uri: Uri)
         fun onCancelContractCreation()
-    }
-
-    companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment Crowdfunding2.
-         */
-        // TODO: Rename and change types and number of parameters
-        @JvmStatic
-        fun newInstance(param1: String, param2: String) =
-            Crowdfunding2().apply {
-                arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
-                }
-            }
     }
 }

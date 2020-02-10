@@ -2,52 +2,47 @@ package com.aveyon.meivsm.ui.home.crowdfunding
 
 import android.content.Context
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.Button
 import android.widget.Spinner
+import androidx.core.widget.doOnTextChanged
+import androidx.databinding.DataBindingUtil
+import androidx.fragment.app.activityViewModels
 import androidx.navigation.findNavController
 import com.aveyon.meivsm.R
+import com.aveyon.meivsm.databinding.FragmentCrowdfunding1Binding
+import com.google.android.material.textfield.TextInputEditText
+import java.text.SimpleDateFormat
+import java.util.*
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
-
-/**
- * A simple [Fragment] subclass.
- * Activities that contain this fragment must implement the
- * [Crowdfunding1.OnFragmentInteractionListener] interface
- * to handle interaction events.
- * Use the [Crowdfunding1.newInstance] factory method to
- * create an instance of this fragment.
- */
-class Crowdfunding1 : Fragment() {
-    // TODO: Rename and change types of parameters
-    private var param1: String? = null
-    private var param2: String? = null
+class Crowdfunding1Fragment : Fragment() {
     private var listener: OnFragmentInteractionListener? = null
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
-        }
-    }
+    private val viewModel: CrowdfundingCreationViewModel by activityViewModels()
+
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        var fragment = inflater.inflate(R.layout.fragment_crowdfunding1, container, false);
+        var binding = DataBindingUtil.inflate<FragmentCrowdfunding1Binding>(
+            inflater,
+            R.layout.fragment_crowdfunding1,
+            container,
+            false
+        )
 
-        var spinner = fragment.findViewById<Spinner>(R.id.crowdfunding_unit_spinner)
-        ArrayAdapter.createFromResource(
+        binding.viewModel = viewModel
+
+        var spinner = binding.root.findViewById<Spinner>(R.id.crowdfunding_unit_spinner)
+        var adapter = ArrayAdapter.createFromResource(
             activity,
             R.array.eth_units_array,
             android.R.layout.simple_spinner_item
@@ -57,19 +52,54 @@ class Crowdfunding1 : Fragment() {
             // Apply the adapter to the spinner
             spinner.adapter = adapter
         }
+        // Bind values and create listener for spinner in fragment since i dont know how
+        // to do databinding with a spinner..
+        spinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+            override fun onNothingSelected(parent: AdapterView<*>?) {
+                viewModel.templateParameters.unit = "ether"
+            }
+
+            override fun onItemSelected(
+                parent: AdapterView<*>?,
+                view: View?,
+                position: Int,
+                id: Long
+            ) {
+                if (adapter.getItem(position) != null)
+                    viewModel.templateParameters.unit =
+                        adapter.getItem(position).toString().toLowerCase()
+                else
+                    onNothingSelected(parent)
+            }
+        }
+
+        // Convert String date to a timestamp (long) value when User makes input change
+        var endDateInputfield =
+            binding.root.findViewById<TextInputEditText>(R.id.crowdfunding_endDate)
+        endDateInputfield.doOnTextChanged { text, start, count, after ->
+            if (text.toString().length == 10) {
+                var dateFormat = SimpleDateFormat("dd.MM.yyyy", Locale.GERMAN)
+                var date = dateFormat.parse(text.toString())
+                viewModel.templateParameters.endDate = date.time
+                Log.d(javaClass.name, date.time.toString())
+                Log.d(javaClass.name, text.toString())
+            } else {
+                // TODO error
+            }
+        }
 
         // Zur nächsten Seite..
-        fragment.findViewById<Button>(R.id.crowdfunding_next1).setOnClickListener { v ->
-            val action = Crowdfunding1Directions.actionCrowdfunding1ToCrowdfunding2()
+        binding.root.findViewById<Button>(R.id.crowdfunding_next1).setOnClickListener { v ->
+            val action = Crowdfunding1FragmentDirections.actionCrowdfunding1ToCrowdfunding2()
             v.findNavController().navigate(action)
         }
 
         // Zur Main Activity zurück gehen
-        fragment.findViewById<Button>(R.id.crowdfunding_cancel).setOnClickListener{
+        binding.root.findViewById<Button>(R.id.crowdfunding_cancel).setOnClickListener {
             listener?.onCancelContractCreation()
         }
 
-        return fragment
+        return binding.root
     }
 
     override fun onAttach(context: Context) {
@@ -99,25 +129,5 @@ class Crowdfunding1 : Fragment() {
      */
     interface OnFragmentInteractionListener {
         fun onCancelContractCreation()
-    }
-
-    companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment Crowdfunding1.
-         */
-        // TODO: Rename and change types and number of parameters
-        @JvmStatic
-        fun newInstance(param1: String, param2: String) =
-            Crowdfunding1().apply {
-                arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
-                }
-            }
     }
 }

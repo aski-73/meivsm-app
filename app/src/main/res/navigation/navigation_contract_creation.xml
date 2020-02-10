@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/crowdfunding1"
-        android:name="com.aveyon.meivsm.ui.home.crowdfunding.Crowdfunding1"
+        android:name="com.aveyon.meivsm.ui.home.crowdfunding.Crowdfunding1Fragment"
         android:label="Crowdfunding Vertrag erstellen"
         tools:layout="@layout/fragment_crowdfunding1">
         <action
@@ -21,7 +21,7 @@
     </fragment>
     <fragment
         android:id="@+id/crowdfunding2"
-        android:name="com.aveyon.meivsm.ui.home.crowdfunding.Crowdfunding2"
+        android:name="com.aveyon.meivsm.ui.home.crowdfunding.Crowdfunding2Fragment"
         android:label="Crowdfunding Vertrag erstellen"
         tools:layout="@layout/fragment_crowdfunding2">
         <action
@@ -36,7 +36,7 @@
     </fragment>
     <fragment
         android:id="@+id/crowdfunding3"
-        android:name="com.aveyon.meivsm.ui.home.crowdfunding.Crowdfunding3"
+        android:name="com.aveyon.meivsm.ui.home.crowdfunding.Crowdfunding3Fragment"
         android:label="fragment_crowdfunding3"
         tools:layout="@layout/fragment_crowdfunding3" >
         <action
@@ -47,10 +47,22 @@
             app:popEnterAnim="@anim/nav_default_pop_enter_anim"
             app:popExitAnim="@anim/nav_default_pop_exit_anim"
             app:popUpTo="@+id/crowdfunding3" />
+        <action
+            android:id="@+id/action_crowdfunding3_to_errorFragment2"
+            app:destination="@id/errorFragment2" />
     </fragment>
     <fragment
         android:id="@+id/crowdfunding4"
         android:name="com.aveyon.meivsm.ui.home.crowdfunding.Crowdfunding4"
         android:label="fragment_crowdfunding4"
         tools:layout="@layout/fragment_crowdfunding4" />
+    <fragment
+        android:id="@+id/errorFragment2"
+        android:name="com.aveyon.meivsm.ui.ErrorFragment"
+        android:label="ErrorFragment" >
+        <argument
+            android:name="errorText"
+            app:argType="string"
+            android:defaultValue="Error occured" />
+    </fragment>
 </navigation>

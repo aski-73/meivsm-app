@@ -13,7 +13,6 @@ import java.math.BigInteger
 import java.text.SimpleDateFormat
 import java.util.*
 
-
 @BindingAdapter("crowdfundingDesc")
 fun crowdfundingDesc(view: View, state: String?) {
     if (state == null)

@@ -37,7 +37,7 @@
 
     <string name="crowdfunding_title">Projektbezeichnung</string>
     <string name="crowdfunding_goal">Zielpreis</string>
-    <string name="crowdfunding_end_date">Enddatum (im Format DD-MM-YY)</string>
+    <string name="crowdfunding_end_date">Enddatum (im Format DD.MM.YYYY)</string>
     <string name="crowdfunding_receiver">Empfänger</string>
     <string name="crowdfunding_creating">Crowdfunding Smart Contract wird erstellt</string>
     <string name="crowdfunding_creating_desc">
