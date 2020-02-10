@@ -6,11 +6,10 @@ import androidx.lifecycle.*
 import androidx.navigation.ActionOnlyNavDirections
 import androidx.navigation.NavDirections
 import com.aveyon.meivsm.db.AppDatabase
-import com.aveyon.meivsm.interfaces.GenericContractInterface
+import com.aveyon.meivsm.web3.GenericContractInterface
 import com.aveyon.meivsm.services.ServiceLocator
 import com.aveyon.meivsm.utils.exceptions.NoAccountExistsException
 import com.aveyon.meivsm.web3.CrowdfundingContract
-import kotlinx.coroutines.launch
 import com.aveyon.meivsm.R
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
@@ -31,7 +30,7 @@ class ContractsViewModel(
         }
     }
 
-    private val blockchainDiscovery = ServiceLocator.blockchainDiscovery()
+    private val blockchainDiscovery = ServiceLocator.blockchainService()
 
     lateinit var selectedContract: GenericContractInterface
 
@@ -51,6 +50,8 @@ class ContractsViewModel(
                 throw NoAccountExistsException(getApplication<Application>().getString(R.string.error_noaccounts))
 
             var navDirection: NavDirections
+            Log.d(javaClass.name, (contract as CrowdfundingContract).state()?.send().toString())
+            Log.d(javaClass.name, (contract as CrowdfundingContract).sum().send().toString())
             when ((contract as CrowdfundingContract).state()?.send()) {
                 "CREATED" -> {
                     navDirection =

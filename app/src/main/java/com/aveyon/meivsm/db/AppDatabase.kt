@@ -34,6 +34,15 @@ abstract class AppDatabase : RoomDatabase() {
                         "4fe33962a4b49a7490cf29958468a78c391f10cd70983ce17d9e4d5df949d8d7"
                     )
                     appDao.insertEOA(eoa)
+
+                    appDao.deleteAllContacts()
+
+                    var contact = Contact(
+                        0,
+                        "company",
+                        "0xae410d3Dbd505a7c9931885Fdc678e125833774E"
+                    )
+                    appDao.insertContacts(contact)
                 }
             }
         }

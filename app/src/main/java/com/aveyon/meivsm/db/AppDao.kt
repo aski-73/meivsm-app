@@ -33,6 +33,9 @@ interface AppDao {
     @Delete
     suspend fun deleteEOA(vararg eoa: ExternallyOwnedAccount)
 
+    @Query("DELETE FROM contacts")
+    suspend fun deleteAllContacts()
+
     @Query("DELETE FROM eoas")
     suspend fun deleteAllEOAs()
 
@@ -41,6 +44,9 @@ interface AppDao {
 
     @Query("SELECT * FROM eoas")
     suspend fun loadAllEOAs(): List<ExternallyOwnedAccount>
+
+    @Query("SELECT * FROM contacts")
+    suspend fun loadAllContacts(): List<Contact>
 
     @Query("SELECT * FROM contacts")
     fun monitorAllContacts(): LiveData<List<Contact>>
