@@ -18,9 +18,7 @@ import androidx.fragment.app.activityViewModels
 import androidx.navigation.findNavController
 import com.aveyon.meivsm.databinding.FragmentCrowdfunding2Binding
 import androidx.lifecycle.observe
-import com.aveyon.meivsm.db.AccountInterface
-import java.util.*
-import kotlin.collections.ArrayList
+import com.aveyon.meivsm.services.db.AccountInterface
 
 class Crowdfunding2Fragment : Fragment() {
     private var listener: OnFragmentInteractionListener? = null

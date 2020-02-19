@@ -5,7 +5,7 @@ package com.aveyon.meivsm.services
  */
 object ServiceLocator {
 
-    val blockchainService: BlockchainService by lazy {
+    private val blockchainService: BlockchainService by lazy {
         BlockchainService()
     }
 

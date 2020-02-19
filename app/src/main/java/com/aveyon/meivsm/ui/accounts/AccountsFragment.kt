@@ -81,7 +81,7 @@ class AccountsFragment : Fragment(), ContactViewHolder.AdapterItemClickListener 
     /**
      * Click on an item in the contact recycler view
      */
-    override fun onItemClick(view: View, position: Int) {
+    override fun onContactItemClick(view: View, position: Int) {
         accountsViewModel.contactToUpdate = contactAdapter.dataSet[position]
         onNavToContactUpdate()
     }

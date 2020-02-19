@@ -1,4 +1,4 @@
-package com.aveyon.meivsm.web3;
+package com.aveyon.meivsm.services.web3;
 
 import java.math.BigInteger;
 import java.util.Arrays;

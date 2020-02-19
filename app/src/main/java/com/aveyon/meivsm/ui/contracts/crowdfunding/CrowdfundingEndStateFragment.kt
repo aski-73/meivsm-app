@@ -12,7 +12,7 @@ import com.aveyon.meivsm.R
 import com.aveyon.meivsm.databinding.FragmentCrowdfundingEndStateBinding
 import com.aveyon.meivsm.ui.CrowdfundingFragmentsInteractionListener
 import com.aveyon.meivsm.ui.contracts.ContractsViewModel
-import com.aveyon.meivsm.web3.CrowdfundingContract
+import com.aveyon.meivsm.services.web3.CrowdfundingContract
 
 class CrowdfundingEndStateFragment : Fragment() {
     private var listener: CrowdfundingFragmentsInteractionListener? = null

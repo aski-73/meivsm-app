@@ -7,6 +7,9 @@
         <variable
             name="viewModel"
             type="com.aveyon.meivsm.ui.accounts.AccountsViewModel" />
+        <variable
+            name="fragment"
+            type="com.aveyon.meivsm.ui.accounts.contacts.ContactCreationFragment" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -70,7 +73,7 @@
             android:layout_width="@dimen/global_btn_width"
             android:layout_height="@dimen/global_btn_height"
             android:layout_marginBottom="80dp"
-            android:onClick="@{() -> viewModel.createContact()}"
+            android:onClick="@{() -> fragment.onContactCreate()}"
             android:text="@string/global_btn_create"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"

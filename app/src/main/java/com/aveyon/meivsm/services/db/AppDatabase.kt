@@ -1,15 +1,17 @@
-package com.aveyon.meivsm.db
+package com.aveyon.meivsm.services.db
 
 import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
 import androidx.sqlite.db.SupportSQLiteDatabase
+import com.aveyon.meivsm.model.entities.Contact
+import com.aveyon.meivsm.model.entities.Contract
+import com.aveyon.meivsm.model.entities.ExternallyOwnedAccount
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
-import java.io.Externalizable
 
-@Database(entities = [Contact::class, Contract::class, ExternallyOwnedAccount::class], version = 1)
+@Database(entities = [Contact::class, ExternallyOwnedAccount::class], version = 1)
 abstract class AppDatabase : RoomDatabase() {
     abstract fun appDao(): AppDao
 
@@ -19,37 +21,37 @@ abstract class AppDatabase : RoomDatabase() {
 
         override fun onOpen(db: SupportSQLiteDatabase) {
             super.onOpen(db)
-            INSTANCE?.let { database ->
-                scope.launch {
-                    var appDao = database.appDao()
-
-                    // Delete all content here.
-                    appDao.deleteAllEOAs()
-
-                    // Add sample words.
-                    var eoa = ExternallyOwnedAccount(
-                        0,
-                        "TestKonto",
-                        "0x60696E2f6bd0f26386eF6BC23658c43334a9bD76",
-                        "4fe33962a4b49a7490cf29958468a78c391f10cd70983ce17d9e4d5df949d8d7"
-                    )
-                    appDao.insertEOA(eoa)
-
-                    appDao.deleteAllContacts()
-
-                    var contact = Contact(
-                        0,
-                        "company",
-                        "0xae410d3Dbd505a7c9931885Fdc678e125833774E"
-                    )
-                    appDao.insertContacts(contact)
-                }
-            }
+//            INSTANCE?.let { database ->
+//                scope.launch {
+//                    var appDao = database.appDao()
+//
+//                    // Delete all content here.
+//                    appDao.deleteAllEOAs()
+//
+//                    // Add sample words.
+//                    var eoa =
+//                        ExternallyOwnedAccount(
+//                            0,
+//                            "TestKonto",
+//                            "0x027b61b2340D8Ba16B35e122a969fC9b4484ccc6",
+//                            "2f9029de3aa4d154ab603820a4d2ededddcff6f391aec81f9d2fbdf2cb0afbc1"
+//                        )
+//                    appDao.insertEOA(eoa)
+//
+//                    appDao.deleteAllContacts()
+//
+//                    var contact = Contact(
+//                        0,
+//                        "company",
+//                        "0xD52910c88309A7014078E3795c15753A858aee2A"
+//                    )
+//                    appDao.insertContacts(contact)
+//                }
+//            }
         }
     }
 
     companion object {
-
         @Volatile
         private var INSTANCE: AppDatabase? = null
 

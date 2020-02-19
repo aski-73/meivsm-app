@@ -47,16 +47,16 @@
         tools:layout="@layout/fragment_contracts" >
         <action
             android:id="@+id/action_contractsFragment_to_crowdfundingFundingState"
-            app:destination="@id/crowdfundingFundingState" />
+            app:destination="@id/crowdfundingFundingStateFragment" />
         <action
             android:id="@+id/action_contractsFragment_to_crowdfundingEndState"
-            app:destination="@id/crowdfundingEndState" />
+            app:destination="@id/crowdfundingEndStateFragment" />
     </fragment>
     <fragment
         android:id="@+id/accountCreationFragment"
         android:name="com.aveyon.meivsm.ui.accounts.AccountCreationFragment"
-        android:label="fragment_account_creation"
-        tools:layout="@layout/fragment_account_creation" >
+        android:label="@string/eoa_creation_header"
+        tools:layout="@layout/fragment_account_creation">
         <action
             android:id="@+id/action_accountCreationFragment_to_navigation_accounts"
             app:destination="@id/accountsFragment" />
@@ -64,32 +64,35 @@
     <fragment
         android:id="@+id/contactManageFragment"
         android:name="com.aveyon.meivsm.ui.accounts.contacts.ContactManageFragment"
-        android:label="fragment_contact_creation"
-        tools:layout="@layout/fragment_contact_manage" >
+        android:label="@string/contact_manage_header"
+        tools:layout="@layout/fragment_contact_manage">
         <action
             android:id="@+id/action_contactCreationFragment_to_navigation_accounts"
             app:destination="@id/accountsFragment"
             app:enterAnim="@anim/fragment_close_enter"
             app:exitAnim="@anim/fragment_close_exit" />
+        <action
+            android:id="@+id/action_contactManageFragment_to_errorFragment"
+            app:destination="@id/errorFragment" />
     </fragment>
     <fragment
         android:id="@+id/contactCreationFragment"
         android:name="com.aveyon.meivsm.ui.accounts.contacts.ContactCreationFragment"
-        android:label="fragment_contact_creation"
+        android:label="@string/contact_add_header"
         tools:layout="@layout/fragment_contact_creation" />
     <fragment
-        android:id="@+id/crowdfundingFundingState"
+        android:id="@+id/crowdfundingFundingStateFragment"
         android:name="com.aveyon.meivsm.ui.contracts.crowdfunding.CrowdfundingFundingStateFragment"
-        android:label="fragment_crowdfunding_funding_state"
-        tools:layout="@layout/fragment_crowdfunding_funding_state" >
+        android:label="@string/crowdfunding_header"
+        tools:layout="@layout/fragment_crowdfunding_funding_state">
         <action
             android:id="@+id/action_crowdfundingFundingState_to_crowdfundingPayingFragment"
             app:destination="@id/crowdfundingPayingFragment" />
     </fragment>
     <fragment
-        android:id="@+id/crowdfundingEndState"
+        android:id="@+id/crowdfundingEndStateFragment"
         android:name="com.aveyon.meivsm.ui.contracts.crowdfunding.CrowdfundingEndStateFragment"
-        android:label="fragment_crowdfunding_end_state"
+        android:label="@string/crowdfunding_header"
         tools:layout="@layout/fragment_crowdfunding_end_state" />
 
 
@@ -100,8 +103,8 @@
     <fragment
         android:id="@+id/crowdfundingPayingFragment"
         android:name="com.aveyon.meivsm.ui.contracts.crowdfunding.CrowdfundingPayingFragment"
-        android:label="fragment_crowdfunding_paying"
-        tools:layout="@layout/fragment_crowdfunding_paying" >
+        android:label="@string/crowdfunding_header"
+        tools:layout="@layout/fragment_crowdfunding_paying">
         <action
             android:id="@+id/action_crowdfundingPayingFragment_to_crowdfundingDoTransactionFragment"
             app:destination="@id/crowdfundingDoTransactionFragment" />
@@ -137,5 +140,5 @@
     <fragment
         android:id="@+id/accountManageFragment"
         android:name="com.aveyon.meivsm.ui.accounts.AccountManageFragment"
-        android:label="AccountManageFragment" />
+        android:label="@string/eoa_manage_header" />
 </navigation>

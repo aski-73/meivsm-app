@@ -1,13 +1,10 @@
 package com.aveyon.meivsm.ui.accounts.contacts
 
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.TextView
-import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.RecyclerView
-import com.aveyon.meivsm.db.Contact
-import java.lang.RuntimeException
+import com.aveyon.meivsm.model.entities.Contact
 import java.util.*
 
 

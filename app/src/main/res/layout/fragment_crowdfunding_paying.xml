@@ -14,6 +14,10 @@
             type="com.aveyon.meivsm.ui.contracts.crowdfunding.CrowdfundingViewModel" />
 
         <variable
+            name="accountsViewModel"
+            type="com.aveyon.meivsm.ui.accounts.AccountsViewModel" />
+
+        <variable
             name="spinnerAdapter"
             type="android.widget.ArrayAdapter" />
     </data>
@@ -55,7 +59,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
             android:layout_marginTop="32dp"
-            android:text="@string/accounts_balance"
+            android:text="@{accountsViewModel.accountBalance}"
             android:textSize="18sp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/balance_header" />
@@ -98,12 +102,14 @@
             android:id="@+id/button"
             android:layout_width="@dimen/global_btn_width"
             android:layout_height="@dimen/global_btn_height"
-            android:layout_marginTop="550dp"
+            android:layout_marginTop="196dp"
+            android:layout_marginBottom="90dp"
             android:onClick="@{() -> fragment.onMakePayment()}"
             android:text="@string/global_btn_pay"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toBottomOf="@+id/crowdfunding_goal_label" />
 
         <Button
             android:id="@+id/button2"
@@ -111,8 +117,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="32dp"
-            android:text="@string/global_btn_cancel"
             android:onClick="@{() -> fragment.onCancel()}"
+            android:text="@string/global_btn_cancel"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/button" />

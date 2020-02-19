@@ -1,4 +1,4 @@
-package com.aveyon.meivsm.web3;
+package com.aveyon.meivsm.services.web3;
 
 import java.math.BigInteger;
 import java.util.Arrays;
@@ -211,11 +211,6 @@ public class CrowdfundingContract extends Contract implements GenericContractInt
     public static String getPreviouslyDeployedAddress(String networkId) {
         return _addresses.get(networkId);
     }
-
-//    @Override
-//    public boolean isValid() {
-//        return true;
-//    }
 
     @NotNull
     @Override

@@ -12,12 +12,7 @@
         tools:layout="@layout/fragment_crowdfunding1">
         <action
             android:id="@+id/action_crowdfunding1_to_crowdfunding2"
-            app:destination="@+id/crowdfunding2"
-            app:enterAnim="@anim/nav_default_pop_enter_anim"
-            app:exitAnim="@anim/nav_default_pop_exit_anim"
-            app:popEnterAnim="@anim/nav_default_pop_enter_anim"
-            app:popExitAnim="@anim/nav_default_pop_exit_anim"
-            app:popUpTo="@+id/crowdfunding1" />
+            app:destination="@id/crowdfunding2" />
     </fragment>
     <fragment
         android:id="@+id/crowdfunding2"
@@ -26,13 +21,7 @@
         tools:layout="@layout/fragment_crowdfunding2">
         <action
             android:id="@+id/action_crowdfunding2_to_crowdfunding3"
-            app:destination="@id/crowdfunding3"
-            app:enterAnim="@anim/nav_default_enter_anim"
-            app:exitAnim="@anim/nav_default_exit_anim"
-            app:launchSingleTop="false"
-            app:popEnterAnim="@anim/nav_default_pop_enter_anim"
-            app:popExitAnim="@anim/nav_default_pop_exit_anim"
-            app:popUpTo="@+id/crowdfunding2" />
+            app:destination="@id/crowdfunding3" />
     </fragment>
     <fragment
         android:id="@+id/crowdfunding3"
@@ -42,14 +31,11 @@
         <action
             android:id="@+id/action_crowdfunding3_to_crowdfunding4"
             app:destination="@id/crowdfunding4"
-            app:enterAnim="@anim/nav_default_enter_anim"
-            app:exitAnim="@anim/nav_default_exit_anim"
-            app:popEnterAnim="@anim/nav_default_pop_enter_anim"
-            app:popExitAnim="@anim/nav_default_pop_exit_anim"
-            app:popUpTo="@+id/crowdfunding3" />
+            app:popUpTo="@id/crowdfunding1" />
         <action
             android:id="@+id/action_crowdfunding3_to_errorFragment2"
-            app:destination="@id/errorFragment2" />
+            app:destination="@id/errorFragment2"
+            app:popUpTo="@id/crowdfunding2" />
     </fragment>
     <fragment
         android:id="@+id/crowdfunding4"

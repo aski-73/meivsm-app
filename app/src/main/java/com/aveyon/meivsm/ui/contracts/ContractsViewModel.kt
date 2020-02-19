@@ -5,11 +5,11 @@ import android.util.Log
 import androidx.lifecycle.*
 import androidx.navigation.ActionOnlyNavDirections
 import androidx.navigation.NavDirections
-import com.aveyon.meivsm.db.AppDatabase
-import com.aveyon.meivsm.web3.GenericContractInterface
+import com.aveyon.meivsm.services.db.AppDatabase
+import com.aveyon.meivsm.services.web3.GenericContractInterface
 import com.aveyon.meivsm.services.ServiceLocator
 import com.aveyon.meivsm.utils.exceptions.NoAccountExistsException
-import com.aveyon.meivsm.web3.CrowdfundingContract
+import com.aveyon.meivsm.services.web3.CrowdfundingContract
 import com.aveyon.meivsm.R
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext

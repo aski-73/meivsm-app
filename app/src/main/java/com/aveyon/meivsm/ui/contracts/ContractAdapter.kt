@@ -4,7 +4,7 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.cardview.widget.CardView
 import androidx.recyclerview.widget.RecyclerView
-import com.aveyon.meivsm.web3.GenericContractInterface
+import com.aveyon.meivsm.services.web3.GenericContractInterface
 import java.util.*
 
 class ContractAdapter(private var itemClickListener: ContractViewHolder.AdapterItemClickListener) :

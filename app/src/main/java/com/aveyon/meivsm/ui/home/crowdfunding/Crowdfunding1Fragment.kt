@@ -80,9 +80,10 @@ class Crowdfunding1Fragment : Fragment() {
             if (text.toString().length == 10) {
                 var dateFormat = SimpleDateFormat("dd.MM.yyyy", Locale.GERMAN)
                 var date = dateFormat.parse(text.toString())
-                viewModel.templateParameters.endDate = date.time
+                // divide by 1000 to get seconds, because contract uses seconds
+                viewModel.templateParameters.endDate = date.time / 1000
                 Log.d(javaClass.name, date.time.toString())
-                Log.d(javaClass.name, text.toString())
+                Log.d(javaClass.name, viewModel.templateParameters.endDate.toString())
             } else {
                 // TODO error
             }

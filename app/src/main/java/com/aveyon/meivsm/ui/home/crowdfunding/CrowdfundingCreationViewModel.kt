@@ -2,12 +2,12 @@ package com.aveyon.meivsm.ui.home.crowdfunding
 
 import android.app.Application
 import androidx.lifecycle.*
-import com.aveyon.meivsm.db.AppDatabase
-import com.aveyon.meivsm.db.Contact
-import com.aveyon.meivsm.db.ExternallyOwnedAccount
-import com.aveyon.meivsm.services.CrowdfundingTemplateParameters
+import com.aveyon.meivsm.services.db.AppDatabase
+import com.aveyon.meivsm.model.entities.Contact
+import com.aveyon.meivsm.model.entities.ExternallyOwnedAccount
+import com.aveyon.meivsm.model.CrowdfundingTemplateParameters
 import com.aveyon.meivsm.services.ServiceLocator
-import com.aveyon.meivsm.web3.CrowdfundingContract
+import com.aveyon.meivsm.services.web3.CrowdfundingContract
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import java.math.BigInteger
@@ -43,19 +43,23 @@ class CrowdfundingCreationViewModel(application: Application) : AndroidViewModel
     /**
      * Compiles Contract with template parameters and deploys it to blockchain
      */
-    suspend fun createNewCrowdfundingContract(eoa: ExternallyOwnedAccount) = withContext(Dispatchers.IO) {
-        // Send template params to http server to insert params in tempalte and compile
-        val response = compilerApiService.postCrowdfunding(templateParameters).execute()
-        val binary = response.body()
+    suspend fun createNewCrowdfundingContract(eoa: ExternallyOwnedAccount) =
+        withContext(Dispatchers.IO) {
+            // Send template params to http server to insert params in tempalte and compile
+            val response = compilerApiService.postCrowdfunding(templateParameters).execute()
+            val binary = response.body()
 
-        // deploy binary if compiled contract to blockchain
-        val contract = blockchainService.deployContract(binary.toString(), eoa)
+            // deploy binary if compiled contract to blockchain
+            val contract = blockchainService.deployContract(
+                binary.toString(),
+                eoa,
+                CrowdfundingContract::class.java
+            )
 
-        // register contract
-        blockchainService.registerContract(eoa, contract.contractAddress.toString())
+            // register contract
+            blockchainService.registerContract(eoa, contract.contractAddress.toString())
 
-        // make first init transaction in order to make contract interactive via this app
-        (contract as CrowdfundingContract).handle("init", BigInteger.ZERO).send()
-    }
-
+            // make first init transaction in order to make contract interactive via this app
+            (contract as CrowdfundingContract).handle("init", BigInteger.ZERO).send()
+        }
 }

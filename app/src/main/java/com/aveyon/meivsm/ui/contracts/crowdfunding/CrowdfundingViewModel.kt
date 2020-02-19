@@ -2,11 +2,8 @@ package com.aveyon.meivsm.ui.contracts.crowdfunding
 
 import android.util.Log
 import androidx.lifecycle.*
-import com.aveyon.meivsm.services.ServiceLocator
-import com.aveyon.meivsm.ui.Validator
-import com.aveyon.meivsm.web3.CrowdfundingContract
+import com.aveyon.meivsm.services.web3.CrowdfundingContract
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import org.web3j.protocol.core.methods.response.TransactionReceipt
 import org.web3j.utils.Convert
@@ -16,7 +13,7 @@ class CrowdfundingViewModel(var contract: CrowdfundingContract) : ViewModel() {
 
     /**
      * get goal with liveData builder function. Suspend function that suspends ands resume on main thread,
-     * bit runs on IO Thread. Creates a LiveData object. When
+     * but runs on IO Thread. Creates a LiveData object.
      */
     val goal: LiveData<BigInteger> = liveData(Dispatchers.IO) {
         emit(contract.goal().send())
@@ -34,6 +31,13 @@ class CrowdfundingViewModel(var contract: CrowdfundingContract) : ViewModel() {
      */
     val endDate: LiveData<BigInteger> = liveData(Dispatchers.IO) {
         emit(contract.endDate().send())
+    }
+
+    /**
+     * get title with liveData builder function
+     */
+    val title: LiveData<String?> = liveData(Dispatchers.IO) {
+        emit(contract.title()?.send())
     }
 
     val state: LiveData<String?> = liveData(Dispatchers.IO) {

@@ -1,5 +1,6 @@
 package com.aveyon.meivsm.services
 
+import com.aveyon.meivsm.model.CrowdfundingTemplateParameters
 import org.junit.Test
 import java.util.*
 

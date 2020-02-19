@@ -4,7 +4,15 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
-        <variable name="viewModel" type="com.aveyon.meivsm.ui.accounts.AccountsViewModel"></variable>
+
+        <variable
+            name="viewModel"
+            type="com.aveyon.meivsm.ui.accounts.AccountsViewModel" />
+
+        <variable
+            name="fragment"
+            type="com.aveyon.meivsm.ui.accounts.contacts.ContactManageFragment" />
+
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -64,26 +72,40 @@
         </com.google.android.material.textfield.TextInputLayout>
 
         <Button
-            android:onClick="@{() -> viewModel.updateContact()}"
+            android:id="@+id/eoa_delete"
+            style="@style/Widget.AppCompat.Button.Borderless"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="420dp"
+            android:onClick="@{() -> fragment.onContactDelete()}"
+            android:text="@string/contact_delete"
+            android:textColor="#DF2925"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <Button
             android:id="@+id/eoa_creation_done"
             android:layout_width="@dimen/global_btn_width"
             android:layout_height="@dimen/global_btn_height"
-            android:layout_marginBottom="80dp"
+            android:layout_marginTop="32dp"
+            android:onClick="@{() -> fragment.onContactUpdate()}"
             android:text="@string/global_btn_update"
-            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent" />
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/eoa_delete" />
 
         <Button
             android:id="@+id/eoa_creation_cancel"
             style="@style/Widget.AppCompat.Button.Borderless"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="26dp"
+            android:layout_marginTop="32dp"
             android:text="@string/global_btn_cancel"
-            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent" />
+            app:layout_constraintHorizontal_bias="0.498"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/eoa_creation_done" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

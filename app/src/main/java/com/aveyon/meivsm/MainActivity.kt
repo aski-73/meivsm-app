@@ -1,6 +1,7 @@
 package com.aveyon.meivsm
 
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import androidx.appcompat.app.AppCompatActivity
@@ -9,12 +10,8 @@ import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import com.aveyon.meivsm.ui.CrowdfundingFragmentsInteractionListener
-import com.aveyon.meivsm.ui.accounts.AccountCreationFragment
-import com.aveyon.meivsm.ui.accounts.contacts.ContactCreationFragment
-import com.aveyon.meivsm.ui.accounts.contacts.ContactManageFragment
 
 class MainActivity : AppCompatActivity(),
-    ContactCreationFragment.OnFragmentInteractionListener,
     CrowdfundingFragmentsInteractionListener {
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -35,15 +32,25 @@ class MainActivity : AppCompatActivity(),
 
         // Show actionbar/toolbar and bottom nav only in certain destinations
         navController.addOnDestinationChangedListener { _, destination, _ ->
-            if (destination.id == R.id.accountCreationFragment ||
-                destination.id == R.id.contactManageFragment
+            if (destination.id == R.id.accountCreationFragment
+                || destination.id == R.id.accountManageFragment
+                || destination.id == R.id.contactCreationFragment
+                || destination.id == R.id.contactManageFragment
+                || destination.id == R.id.crowdfundingFundingStateFragment
+                || destination.id == R.id.crowdfundingPayingFragment
+                || destination.id == R.id.crowdfundingEndStateFragment
             ) {
                 supportActionBar?.show()
+                navView.visibility = View.GONE
+            } else if (destination.id == R.id.crowdfundingDoTransactionFragment
+                || destination.id == R.id.crowdfundingDoneTransactionFragment
+            ) {
                 navView.visibility = View.GONE
             } else {
                 supportActionBar?.hide()
                 navView.visibility = View.VISIBLE
             }
+            Log.d(javaClass.name, destination.toString())
         }
     }
 

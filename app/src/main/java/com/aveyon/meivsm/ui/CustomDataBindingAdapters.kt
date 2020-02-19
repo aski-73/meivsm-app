@@ -4,10 +4,9 @@ import android.view.View
 import android.widget.TextView
 import androidx.databinding.BindingAdapter
 import com.aveyon.meivsm.R
-import com.aveyon.meivsm.db.ExternallyOwnedAccount
+import com.aveyon.meivsm.model.entities.ExternallyOwnedAccount
 import com.google.android.material.textfield.TextInputEditText
 import com.google.android.material.textfield.TextInputLayout
-import org.w3c.dom.Text
 import org.web3j.utils.Convert
 import java.math.BigInteger
 import java.text.SimpleDateFormat
@@ -46,19 +45,22 @@ fun crowdfundingHeader(view: View, state: String?) {
 @BindingAdapter("endDate")
 fun endDate(view: TextView, endDate: BigInteger?) {
     if (endDate != null) {
-        var date = Date(endDate.toLong())
+        // Mit Faktor 1000 multiplizieren, um Millisekunden zu erhalten
+        // Timestamp im Contract wird nämlich als Sekundenwert gespeichert. Date arbeitet jedoch
+        // mit ms
+        var date = Date(endDate.toLong() * 1000)
         var dateFormat = SimpleDateFormat("dd.MM.yyyy hh:mm")
         // texts depend on wheters endDate is over due or not
         if (Date().time > date.time) {
             view.text =
                 view.resources.getString(
                     R.string.crowdfunding_ended_on_date,
-                    dateFormat.format(endDate)
+                    dateFormat.format(date.time)
                 )
         } else {
             view.text = view.resources.getString(
                 R.string.crowdfunding_active_till_end_date,
-                dateFormat.format(endDate)
+                dateFormat.format(date.time)
             )
         }
     }

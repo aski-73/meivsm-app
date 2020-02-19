@@ -1,4 +1,4 @@
-package com.aveyon.meivsm.db
+package com.aveyon.meivsm.model.entities
 
 import androidx.room.Embedded
 import androidx.room.Relation

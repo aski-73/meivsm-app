@@ -1,7 +1,6 @@
 package com.aveyon.meivsm.ui.contracts
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -15,7 +14,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.aveyon.meivsm.R
 import com.aveyon.meivsm.databinding.FragmentContractsBinding
-import com.aveyon.meivsm.web3.ContractCategoriesEnum
+import com.aveyon.meivsm.services.web3.ContractCategoriesEnum
 import kotlinx.coroutines.launch
 
 class ContractsFragment : Fragment(), ContractViewHolder.AdapterItemClickListener {

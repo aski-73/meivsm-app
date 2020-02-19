@@ -12,7 +12,7 @@ import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import com.aveyon.meivsm.R
 import com.aveyon.meivsm.ui.contracts.ContractsViewModel
-import com.aveyon.meivsm.web3.CrowdfundingContract
+import com.aveyon.meivsm.services.web3.CrowdfundingContract
 import kotlinx.coroutines.CoroutineExceptionHandler
 import kotlinx.coroutines.launch
 

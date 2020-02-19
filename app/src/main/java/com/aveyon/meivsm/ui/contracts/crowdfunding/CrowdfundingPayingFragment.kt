@@ -12,13 +12,15 @@ import android.widget.Spinner
 import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.activityViewModels
+import androidx.lifecycle.observe
 import androidx.navigation.fragment.findNavController
 import com.aveyon.meivsm.R
 import com.aveyon.meivsm.databinding.FragmentCrowdfundingPayingBinding
 import com.aveyon.meivsm.ui.CrowdfundingFragmentsInteractionListener
 import com.aveyon.meivsm.ui.Validator
 import com.aveyon.meivsm.ui.contracts.ContractsViewModel
-import com.aveyon.meivsm.web3.CrowdfundingContract
+import com.aveyon.meivsm.services.web3.CrowdfundingContract
+import com.aveyon.meivsm.ui.accounts.AccountsViewModel
 
 class CrowdfundingPayingFragment : Fragment() {
     private var listener: CrowdfundingFragmentsInteractionListener? = null
@@ -27,6 +29,11 @@ class CrowdfundingPayingFragment : Fragment() {
      * Viewmodel needed for accessing selected contract
      */
     val contractsViewModel: ContractsViewModel by activityViewModels()
+
+    /**
+     * Needed for displaying eoa balance
+     */
+    val accountsViewModel: AccountsViewModel by activityViewModels()
 
     lateinit var viewModel: CrowdfundingViewModel
 
@@ -51,6 +58,7 @@ class CrowdfundingPayingFragment : Fragment() {
          * Remind that viewModels are accesssbible after onAttach lifeycle stage
          */
         val _viewModel: CrowdfundingViewModel by activityViewModels { myFactory }
+
         viewModel = _viewModel
     }
 
@@ -70,6 +78,7 @@ class CrowdfundingPayingFragment : Fragment() {
         binding.lifecycleOwner = this
         binding.fragment = this
         binding.viewModel = viewModel
+        binding.accountsViewModel = accountsViewModel
 
         // Bind values and create listener for spinner in fragment since i dont know how
         // to do databinding with a spinner..

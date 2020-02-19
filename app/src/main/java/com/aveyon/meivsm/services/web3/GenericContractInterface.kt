@@ -1,4 +1,4 @@
-package com.aveyon.meivsm.web3
+package com.aveyon.meivsm.services.web3
 
 import org.web3j.protocol.core.RemoteFunctionCall
 

@@ -1,8 +1,8 @@
 package com.aveyon.meivsm.services
 
-import com.aveyon.meivsm.db.ExternallyOwnedAccount
-import com.aveyon.meivsm.web3.ContractRegistryContract
-import com.aveyon.meivsm.web3.CrowdfundingContract
+import com.aveyon.meivsm.model.entities.ExternallyOwnedAccount
+import com.aveyon.meivsm.services.web3.ContractRegistryContract
+import com.aveyon.meivsm.services.web3.CrowdfundingContract
 import kotlinx.coroutines.test.runBlockingTest
 import org.junit.*
 import org.junit.Assert.assertEquals
@@ -25,7 +25,7 @@ class BlockchainServiceIT {
     /**
      * Remote ethereum node
      */
-    var ETH_NODE: String = "http://192.168.0.59:7545"
+    var ETH_NODE: String = "http://192.168.0.49:7545"
 
     private val web3 = Web3j.build(HttpService(ETH_NODE))
 
@@ -33,7 +33,7 @@ class BlockchainServiceIT {
 
     lateinit var crowdfundingContract: CrowdfundingContract
 
-    private val registryContractAddr = "0x30295589F89103B2abFA1cffe7556dE9c5Ad308C"
+    private val registryContractAddr = "0xE43850694D6d64e80c70b96C004E845A9ffCEeE1"
 
     lateinit var logger: Logger
 
@@ -45,8 +45,8 @@ class BlockchainServiceIT {
     var eoa = ExternallyOwnedAccount(
         0,
         "notrelevant",
-        "0x60696E2f6bd0f26386eF6BC23658c43334a9bD76",
-        "4fe33962a4b49a7490cf29958468a78c391f10cd70983ce17d9e4d5df949d8d7"
+        "0x027b61b2340D8Ba16B35e122a969fC9b4484ccc6",
+        "2f9029de3aa4d154ab603820a4d2ededddcff6f391aec81f9d2fbdf2cb0afbc1"
     )
 
     @Before
@@ -95,43 +95,6 @@ class BlockchainServiceIT {
         val wei = BigInteger(Convert.toWei("5", Convert.Unit.ETHER).toString())
         registryContract.remove(crowdfundingContract.contractAddress, wei).sendAsync().get()
     }
-
-//    @Test
-//    fun getAllContractsReturnsListOfStrings() = runBlockingTest {
-//        // GIVEN
-//        var eoa = ExternallyOwnedAccount(
-//            0,
-//            "notrelevant",
-//            "",
-//            "0x7F181DeF2E46196a239aC423a2b77e2E6A4d54a6"
-//        )
-//
-//
-//        // WHEN
-//        var contracts = testSubject.getAllContracts(eoa)
-//        contracts.forEach { c -> println(c) }
-//
-//        // THEN
-//        assert(contracts is List<String>)
-//    }
-
-//    @Test
-//    fun getCompilersReturnsSolidityCompiler() = runBlockingTest {
-//        testSubject.getCompilers().forEach({ s -> println(s) })
-//    }
-
-//    @Test
-//    fun getContractBinary() = runBlockingTest {
-//        // GIVEN
-//        val addr = "0xD635bCD5475C970A272f3aD54640EA2Fc9C63bD4"
-//
-//        // WHEN
-//        val ethCode = testSubject.getContractBinary(addr)
-//
-//        // THEN
-//        println(ethCode.code)
-//
-//    }
 
     @Test
     fun getContractCategoryReturnsCrowdfundingCategory() = runBlockingTest {

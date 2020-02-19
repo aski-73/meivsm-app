@@ -1,17 +1,17 @@
 package com.aveyon.meivsm.services
 
-import com.aveyon.meivsm.db.ExternallyOwnedAccount
-import com.aveyon.meivsm.web3.GenericContractInterface
-import com.aveyon.meivsm.web3.ContractRegistryContract
-import com.aveyon.meivsm.web3.CrowdfundingContract
+import com.aveyon.meivsm.model.entities.ExternallyOwnedAccount
+import com.aveyon.meivsm.services.web3.GenericContractInterface
+import com.aveyon.meivsm.services.web3.ContractRegistryContract
+import com.aveyon.meivsm.services.web3.CrowdfundingContract
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import org.web3j.crypto.Credentials
 import org.web3j.protocol.Web3j
 import org.web3j.protocol.core.DefaultBlockParameter
 import org.web3j.protocol.core.DefaultBlockParameterName
-import org.web3j.protocol.core.methods.response.*
 import org.web3j.protocol.http.HttpService
+import org.web3j.tx.Contract
 import org.web3j.tx.gas.StaticGasProvider
 import org.web3j.utils.Convert
 import java.math.BigInteger
@@ -25,14 +25,14 @@ class BlockchainService {
     /**
      * Remote ethereum node
      */
-    var ETH_NODE: String = "http://192.168.0.59:7545"
+    var ETH_NODE: String = "http://192.168.0.49:7545"
 
     private val web3 = Web3j.build(HttpService(ETH_NODE))
 
     /**
      * Address of the ContractRegistryContract in the test net (Ganache)
      */
-    private val registryContractAddr = "0x6B133f68D06D57dC9C7880678bd5da704C912af6"
+    private val registryContractAddr = "0xE43850694D6d64e80c70b96C004E845A9ffCEeE1"
 
 
     private val gasProvider = StaticGasProvider(BigInteger("1"), BigInteger("6721975"))
@@ -41,12 +41,16 @@ class BlockchainService {
      * Deploy a contract in binary format (compiled solidity code => bytecode) to blockchain
      * with web3j
      */
-    suspend fun deployContract(binary: String, eoa: ExternallyOwnedAccount): GenericContractInterface =
+    suspend fun <T : Contract> deployContract(
+        binary: String,
+        eoa: ExternallyOwnedAccount,
+        type: Class<T>
+    ): Contract =
         withContext(Dispatchers.IO) {
 
             // Use web3j to deploy new Contract
-            val contract = CrowdfundingContract.deployRemoteCall(
-                CrowdfundingContract::class.java,
+            val contract = Contract.deployRemoteCall(
+                type,
                 web3,
                 Credentials.create(eoa.privateKey),
                 gasProvider,
@@ -61,31 +65,22 @@ class BlockchainService {
      * Register a deployed contract to the ContractRegistryContract, so the app can load
      * contracts to interact with
      */
-    suspend fun registerContract(eoa: ExternallyOwnedAccount, addr: String) = withContext(Dispatchers.IO) {
-        val registryContract = ContractRegistryContract.load(
-            registryContractAddr,
-            web3,
-            Credentials.create(eoa.privateKey),
-            gasProvider
-        )
-        val wei  = BigInteger(Convert.toWei("5", Convert.Unit.ETHER).toString())
-        registryContract.register(
-            addr,
-            BigInteger(Date().time.toString()),
-            "crowdfunding",
-            wei
-        ).send()
-    }
-
-    suspend fun getLatestBlock(): EthBlock {
-        var ethblock =
-            web3.ethGetBlockByNumber(DefaultBlockParameterName.LATEST, true).sendAsync().get()
-        return ethblock
-    }
-
-    suspend fun getAccounts(): EthAccounts {
-        return web3.ethAccounts().sendAsync().get()
-    }
+    suspend fun registerContract(eoa: ExternallyOwnedAccount, addr: String) =
+        withContext(Dispatchers.IO) {
+            val registryContract = ContractRegistryContract.load(
+                registryContractAddr,
+                web3,
+                Credentials.create(eoa.privateKey),
+                gasProvider
+            )
+            val wei = BigInteger(Convert.toWei("5", Convert.Unit.ETHER).toString())
+            registryContract.register(
+                addr,
+                BigInteger(Date().time.toString()),
+                "crowdfunding",
+                wei
+            ).send()
+        }
 
     /**
      * Reads all Created Contracts on the blockchain
@@ -99,14 +94,6 @@ class BlockchainService {
             gasProvider
         )
         return contract.getAllContracts().sendAsync().get() as List<String>
-    }
-
-    suspend fun getCompilers(): List<String> {
-        return web3.ethGetCompilers().sendAsync().get().compilers
-    }
-
-    suspend fun getContractBinary(addr: String): EthGetCode {
-        return web3.ethGetCode(addr, DefaultBlockParameter.valueOf("latest")).sendAsync().get()
     }
 
     suspend fun getContractCategory(addr: String, eoa: ExternallyOwnedAccount): String {
@@ -130,7 +117,7 @@ class BlockchainService {
         category: String,
         eoa: ExternallyOwnedAccount
     ): GenericContractInterface {
-        var contract: GenericContractInterface
+        val contract: GenericContractInterface
 
         // Since only crowdfunding contracts exists..
         contract =
@@ -147,14 +134,23 @@ class BlockchainService {
      */
     suspend fun getAllContracts(eoa: ExternallyOwnedAccount): List<GenericContractInterface> =
         withContext(Dispatchers.IO) {
-            var contractAddresses = getAllContractsAddresses(eoa)
-            var contracts = LinkedList<GenericContractInterface>()
+            val contractAddresses = getAllContractsAddresses(eoa)
+            val contracts = LinkedList<GenericContractInterface>()
 
             contractAddresses.forEach { addr ->
-                var category = getContractCategory(addr, eoa)
+                val category = getContractCategory(addr, eoa)
                 contracts.add(getContract(addr, category, eoa))
             }
 
             contracts
         }
+
+
+    /**
+     * Loads Balance of an ethereum account.
+     * Blocking Call. Call this in IO Thread
+     */
+    fun getBalance(addr: String): BigInteger {
+        return web3.ethGetBalance(addr, DefaultBlockParameterName.LATEST).send().balance
+    }
 }
